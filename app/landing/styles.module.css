@@ -1,0 +1,177 @@
+/* Main */
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-image: url('/landing/bg.png');
+    background-position: center top -50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.top {
+    padding: 2rem 1rem;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.top__title {
+    color: white;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.top__hr {
+    width: 25px;
+    height: 2px;
+    background: var(--secondary);
+    border: none;
+}
+
+.top__subtitle {
+    color: var(--secondary);
+    font-weight: 400;
+}
+
+.top__light {
+    font-weight: 700;
+}
+
+.background {
+    z-index: 1;
+    position: absolute;
+    background: var(--secondary);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    height: 90%;
+    top: 75px;
+}
+
+.content {
+    position: relative;
+    margin-top: 50px;
+    flex: 1;
+}
+
+.content__art {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 98;
+    margin: 1rem;
+    top: -10px;
+    padding: 1rem;
+    border-radius: 25px;
+    background: white;
+}
+
+.content__art:nth-child(1) {
+    margin-bottom: 1.5rem;
+}
+
+.content__h3 {
+    font-size: 28px;
+}
+
+.content__hr {
+    border: none;
+    height: 3px;
+    width: 100%;
+    background: var(--secondary);
+}
+
+.content__p {
+    font-size: 16px;
+    color: black;
+}
+
+/* Tablet */
+
+@media (min-width: 768px) {
+
+    .main {
+        background: url('/landing/bg-tablet.png');
+        background-position: 40%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .top {
+        width: 50%;
+        padding: 2rem;
+    }
+
+    .top__title {
+        font-size: 48px;
+        font-weight: 400;
+    }
+
+    .top__subtitle {
+        font-size: 34px;
+    }
+
+    .top__hr {
+        display: none;
+    }
+
+    .content {
+        margin-top: 30%;
+    }
+
+    .content__art {
+        padding: 2rem;
+    }
+
+    .content__h3 {
+        font-size: 40px;
+    }
+
+    .content__p {
+        font-size: 20px;
+    }
+
+    .content__hr{
+        height: 2px;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+
+    .top {
+        padding: 2rem;
+        width: 35%;
+        gap: .5rem;
+    }
+
+    .top__title{
+        line-height: 1.1;
+    }
+
+    .content {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .content__art:nth-child(1) {
+        margin: unset;
+    }
+
+    .content__art {
+        width: 35%;
+        margin: 0;
+    }
+
+    .background{
+        top: 125px;
+        height: 60%;
+    }
+}

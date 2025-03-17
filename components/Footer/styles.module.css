@@ -1,0 +1,16 @@
+.footer {
+    text-align: center;
+    z-index: 99;
+    padding: 20px;
+    background: var(--dark);
+    color: var(--secondary);
+    font-size: 1rem;
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+    .footer {
+        text-align: start;
+    }
+}
