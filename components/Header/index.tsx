@@ -40,7 +40,7 @@ export default function Header({
                 <div className={styles.header__div}>
                     <Link
                         className={styles.header__link}
-                        href={ROUTES.crearCuenta}
+                        href={ROUTES.ingreso}
                     >
                         <button className={styles.header__login}>
                             Ingresar
@@ -48,7 +48,7 @@ export default function Header({
                     </Link>
                 </div>
                 <div className={styles.header__div}>
-                    <Link className={styles.header__link} href={ROUTES.ingreso}>
+                    <Link className={styles.header__link} href={ROUTES.crearCuenta}>
                         <button className={styles.header__create}>
                             Crear cuenta
                         </button>
