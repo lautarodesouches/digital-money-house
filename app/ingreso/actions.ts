@@ -1,6 +1,7 @@
 'use server'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { API_URL } from '../constants'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function login(prevState: any, formData: FormData) {
@@ -18,16 +19,13 @@ export async function login(prevState: any, formData: FormData) {
 
         const body = JSON.stringify({ email, password })
 
-        const response = await fetch(
-            'https://digitalmoney.digitalhouse.com/api/login',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body,
-            }
-        )
+        const response = await fetch(`${API_URL}/api/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body,
+        })
 
         const json = await response.json()
 
