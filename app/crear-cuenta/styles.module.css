@@ -1,3 +1,142 @@
-.main{
+/* Header */
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--secondary);
+    padding: 15px;
+    gap: 1rem;
+}
+
+.header__logo {
+    width: 30%;
+    fill: var(--primary);
+}
+
+.header__nav {
+    width: 60%;
+    display: flex;
+    gap: 1rem;
+}
+
+.header__link {
+    width: 100%;
+    display: flex;
+    color: unset;
+    text-decoration: none;
+}
+
+.header button {
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0.4rem;
+}
+
+.header__login {
+    border: none;
+    background: var(--dark);
+    color: white;
+}
+
+/* Main */
+
+.main {
     flex: 1;
+    background: var(--primary);
+}
+
+.main__title {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 2rem;
+}
+
+.main__form {
+    width: 80%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main__input {
+    padding: 1rem;
+    font-size: 16px;
+    border-radius: 10px;
+    color: black;
+    border: 1px solid #d2ffec;
+}
+
+.main__input::placeholder {
+    color: #7f7f7f;
+}
+
+.inputError {
+    border: 2px solid #ee3838 !important;
+}
+
+.main__hint {
+    color: #eeeaea;
+    font-size: 11.2px;
+}
+
+.main__button {
+    padding: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    background: var(--secondary);
+    border-radius: 10px;
+}
+
+.main__span {
+    text-align: center;
+    margin: 0.5rem;
+    color: var(--error);
+    font-size: 15px;
+}
+
+@media (min-width: 768px) {
+    .header__nav {
+        width: 20%;
+    }
+
+    .main__form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        position: relative;
+    }
+
+    .main__hint {
+        position: absolute;
+        left: 0;
+        top: calc(50% - 0.5rem);
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header__nav {
+        width: 10%;
+    }
+
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main__form {
+        width: 50%;
+    }
 }

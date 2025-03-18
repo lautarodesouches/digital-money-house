@@ -24,8 +24,6 @@ export default function Login() {
     useEffect(() => {
         setIsLoading(false)
 
-        console.log({ state })
-
         if (
             state?.error === 'Contraseña incorrecta. Vuelve a intentarlo.' &&
             content.stage === 'email'
