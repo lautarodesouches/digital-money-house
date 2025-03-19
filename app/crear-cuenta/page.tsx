@@ -3,10 +3,17 @@ import { Footer } from '@/components'
 import styles from './styles.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../routes'
-import { useState } from 'react'
+import { startTransition, useActionState, useEffect, useState } from 'react'
+import { register } from './actions'
 
 export default function Create() {
+    const [state, formAction] = useActionState(register, null)
+
     const [dni, setDni] = useState('')
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordError, setPasswordError] = useState('')
@@ -54,7 +61,7 @@ export default function Create() {
         }
     }
 
-    const verifyForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const isValid =
@@ -65,7 +72,24 @@ export default function Create() {
             !!confirmPassword
 
         setIsFormValid(isValid)
+
+        const formData = new FormData()
+
+        formData.append('firstname', firstname)
+        formData.append('lastname', lastname)
+        formData.append('dni', dni)
+        formData.append('email', email)
+        formData.append('password', password)
+        formData.append('phone', phone)
+
+        startTransition(() => {
+            formAction(formData)
+        })
     }
+
+    useEffect(() => {
+        console.log({ state })
+    }, [state])
 
     return (
         <>
@@ -93,18 +117,26 @@ export default function Create() {
 
             <main className={styles.main}>
                 <h2 className={styles.main__title}>Crear cuenta</h2>
-                <form className={styles.main__form} onSubmit={verifyForm}>
+                <form
+                    className={styles.main__form}
+                    onSubmit={handleSubmit}
+                    action={formAction}
+                >
                     <input
                         className={styles.main__input}
-                        name="name"
+                        name="firstname"
                         type="text"
                         placeholder="Nombre*"
+                        value={firstname}
+                        onChange={e => setFirstname(e.target.value)}
                     />
                     <input
                         className={styles.main__input}
                         name="lastname"
                         type="text"
                         placeholder="Apellido*"
+                        value={lastname}
+                        onChange={e => setLastname(e.target.value)}
                     />
                     <input
                         className={styles.main__input}
@@ -114,13 +146,14 @@ export default function Create() {
                         value={dni}
                         onChange={handleDni}
                         inputMode="numeric"
-                        pattern="[0-9]*"
                     />
                     <input
                         className={styles.main__input}
                         name="email"
                         type="email"
                         placeholder="Correo electrónico*"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
 
                     <span className={styles.main__hint}>
@@ -153,6 +186,8 @@ export default function Create() {
                         name="phone"
                         type="tel"
                         placeholder="Teléfono*"
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
                     />
 
                     <button
