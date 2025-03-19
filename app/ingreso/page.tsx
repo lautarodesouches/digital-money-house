@@ -1,8 +1,8 @@
 'use client'
 import { Footer, Header } from '@/components'
-import styles from './styles.module.css'
+import styles from './page.module.css'
 import Link from 'next/link'
-import { ROUTES } from '../routes'
+import { ROUTES } from '../../routes'
 import { useActionState, useEffect, useState } from 'react'
 import { login } from './actions'
 

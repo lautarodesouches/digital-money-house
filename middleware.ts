@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ROUTES } from './app/routes'
+import { ROUTES } from './routes'
 
 export function middleware(request: NextRequest) {
 
