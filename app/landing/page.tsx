@@ -1,7 +1,7 @@
-import styles from './styles.module.css'
+import styles from './page.module.css'
 import { Footer, Header } from '@/components'
 
-export default function Landing() {
+export default function Home() {
     return (
         <>
             <Header />

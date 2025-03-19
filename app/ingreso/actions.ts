@@ -1,7 +1,8 @@
 'use server'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { API_URL } from '../constants'
+import { API_URL } from '../../constants'
+import { ROUTES } from '../routes'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function login(prevState: any, formData: FormData) {
@@ -55,5 +56,5 @@ export async function login(prevState: any, formData: FormData) {
         }
     }
 
-    return redirect('/dashboard')
+    return redirect(ROUTES.inicio)
 }

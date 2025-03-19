@@ -1,5 +1,6 @@
 export const ROUTES = {
     landing: '/landing',
     ingreso: '/ingreso',
-    crearCuenta: '/crear-cuenta'
+    crearCuenta: '/crear-cuenta',
+    inicio: '/home'
 }

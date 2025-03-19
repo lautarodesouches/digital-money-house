@@ -1,4 +1,4 @@
-import { API_URL } from '../constants'
+import { API_URL } from '../../constants'
 import { redirect } from 'next/navigation'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
