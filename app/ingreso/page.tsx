@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ROUTES } from '../../routes'
 import { useActionState, useEffect, useState } from 'react'
 import { login } from './actions'
+import { useSearchParams } from 'next/navigation'
 
 interface Content {
     stage: 'email' | 'password'
@@ -13,6 +14,9 @@ interface Content {
 }
 
 export default function Login() {
+    const searchParams = useSearchParams()
+    const exito = searchParams.has('exito')
+
     const [state, formAction] = useActionState(login, null)
     const [isLoading, setIsLoading] = useState(false)
     const [content, setContent] = useState<Content>({
@@ -74,10 +78,10 @@ export default function Login() {
                             )}
                         </button>
                     </div>
-                    {content.stage === 'email' && (
+                    {content.stage === 'email' && !exito && (
                         <Link
                             className={styles.form__link}
-                            href={ROUTES.crearCuenta}
+                            href={ROUTES.CREAR_CUENTA}
                         >
                             <button className={styles.form__button}>
                                 Crear cuenta

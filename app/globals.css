@@ -43,3 +43,9 @@ p{
 button{
   font-size: 14px;
 }
+
+a{
+  cursor: pointer;
+  color: unset;
+  text-decoration: none;
+}

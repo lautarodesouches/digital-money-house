@@ -1,11 +1,26 @@
+import { ROUTES } from '@/routes'
 import { API_URL } from '../../constants'
 import { redirect } from 'next/navigation'
+
+type SuccessResponse = {
+    account_id: number
+    email: string
+    user_id: number
+}
+
+type ErrorResponse = {
+    error: string
+}
+
+type Data = SuccessResponse | ErrorResponse
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function register(prevState: any, formData: FormData) {
     const firstname = getFormData('firstname', formData)
     const lastname = getFormData('lastname', formData)
-    const dni = parseInt(getFormData('dni', formData)?.replaceAll('.', '') || '0')
+    const dni = parseInt(
+        getFormData('dni', formData)?.replaceAll('.', '') || '0'
+    )
     const email = getFormData('email', formData)
     const password = getFormData('password', formData)
     const phone = getFormData('phone', formData)
@@ -19,8 +34,6 @@ export async function register(prevState: any, formData: FormData) {
         phone,
     })
 
-    console.log({ body })
-
     const res = await fetch(`${API_URL}/api/users`, {
         method: 'POST',
         headers: {
@@ -29,11 +42,11 @@ export async function register(prevState: any, formData: FormData) {
         body,
     })
 
-    const data = await res.json()
+    const data: Data = await res.json()
 
-    console.log({ data })
+    if ('error' in data) return data.error
 
-    return redirect('/ingreso')
+    return redirect(ROUTES.CREAR_CUENTA_EXITO)
 }
 
 function getFormData(name: string, formData: FormData) {

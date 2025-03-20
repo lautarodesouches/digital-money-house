@@ -56,5 +56,5 @@ export async function login(prevState: any, formData: FormData) {
         }
     }
 
-    return redirect(ROUTES.inicio)
+    return redirect(ROUTES.INICIO)
 }

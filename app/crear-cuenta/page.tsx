@@ -95,7 +95,7 @@ export default function Create() {
         <>
             <header className={styles.header}>
                 <div className={styles.header__div}>
-                    <Link className={styles.header__link} href={ROUTES.landing}>
+                    <Link className={styles.header__link} href={ROUTES.LANDING}>
                         <svg
                             className={styles.header__logo}
                             viewBox="0 0 63 26"
@@ -107,7 +107,7 @@ export default function Create() {
                     </Link>
                 </div>
                 <nav className={styles.header__nav}>
-                    <Link className={styles.header__link} href={ROUTES.ingreso}>
+                    <Link className={styles.header__link} href={ROUTES.INGRESO}>
                         <button className={styles.header__login}>
                             Iniciar sesión
                         </button>
