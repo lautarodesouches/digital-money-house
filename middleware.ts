@@ -1,20 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ROUTES } from './routes'
 
-export function middleware(request: NextRequest) {
-
-    console.log('test');
-    
+export function middleware(request: NextRequest) {    
 
     const token = request.cookies.get('token')
 
     if (
-        (request.nextUrl.pathname !== ROUTES.landing &&
-            request.nextUrl.pathname !== ROUTES.ingreso &&
-            request.nextUrl.pathname !== ROUTES.crearCuenta) &&
+        (request.nextUrl.pathname !== ROUTES.LANDING &&
+            request.nextUrl.pathname !== ROUTES.INGRESO &&
+            request.nextUrl.pathname !== ROUTES.CREAR_CUENTA) &&
         !token
     ) {
-        return NextResponse.redirect(new URL(ROUTES.landing, request.url))
+        return NextResponse.redirect(new URL(ROUTES.LANDING, request.url))
     }
 
     return NextResponse.next()
