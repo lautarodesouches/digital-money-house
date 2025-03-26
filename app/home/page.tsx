@@ -1,19 +1,13 @@
 'use client'
-import { ROUTES } from '@/routes'
-import { useRouter } from 'next/navigation'
+import styles from './page.module.css'
+import { Menu } from '@/components'
 
 export default function Home() {
-    const router = useRouter()
-
-    const handleLogout = async () => {
-        await fetch('/api/logout')
-
-        router.push(ROUTES.LANDING)
-    }
 
     return (
-        <header>
-            <button onClick={handleLogout}>Cerrar sesión</button>
-        </header>
+        <>
+            <Menu name='Manuel Brito' />
+            <main className={styles.main}></main>
+        </>
     )
 }
