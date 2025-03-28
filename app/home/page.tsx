@@ -29,7 +29,7 @@ export default function Home() {
     ]
 
     return (
-        <>
+        <div className={styles.container}>
             <Menu name="Manuel Brito" />
             <main className={styles.main}>
                 <section className={styles.top}>
@@ -69,12 +69,18 @@ export default function Home() {
                     </div>
                 </article>
                 <div className={styles.buttons}>
-                    <Link href={ROUTES.INGRESO} className={styles.buttons__link}>
+                    <Link
+                        href={ROUTES.INGRESO}
+                        className={styles.buttons__link}
+                    >
                         <button className={styles.buttons__btn}>
                             Ingresar dinero
                         </button>
                     </Link>
-                    <Link href={ROUTES.INGRESO} className={styles.buttons__link}>
+                    <Link
+                        href={ROUTES.INGRESO}
+                        className={styles.buttons__link}
+                    >
                         <button className={styles.buttons__btn}>
                             Pago de servicios
                         </button>
@@ -149,6 +155,6 @@ export default function Home() {
                 </section>
             </main>
             <Footer />
-        </>
+        </div>
     )
 }

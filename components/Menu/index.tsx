@@ -36,6 +36,9 @@ export default function Header({ name = 'Mauricio Brito' }: Props) {
                     <div className={styles.header__box}>
                         <span className={styles.header__name}>{initials}</span>
                     </div>
+                    <div className={styles.header__grettings}>
+                        Hola, {name}
+                    </div>
                     <div className={styles.header__container}>
                         <svg
                             viewBox="0 0 33 26"

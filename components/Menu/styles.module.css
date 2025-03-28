@@ -1,4 +1,5 @@
 .header {
+    grid-area: header;
     background: var(--primary);
     display: flex;
     justify-content: space-between;
@@ -30,12 +31,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 14px;
 }
 
 .header__name {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.header__grettings {
+    display: none;
 }
 
 .header__container {
@@ -52,6 +57,7 @@
 }
 
 .nav {
+    grid-area: nav;
     width: 50%;
     height: 100vh;
     position: fixed;
@@ -136,12 +142,64 @@
     list-style: none;
 }
 
+.nav__li {
+    font-weight: 500;
+}
+
+.nav__li:last-child {
+    color: var(--dark);
+}
+
 /* Tablet */
 
 @media (min-width: 768px) {
+    .header {
+        padding: auto 5%;
+        grid-column: span 2;
+    }
+
+    .header__logo {
+        width: 30%;
+    }
+
+    .header__grettings {
+        display: block;
+        color: #fff;
+    }
+
+    .header__container {
+        display: none;
+    }
+
+    .nav {
+        width: unset;
+        height: unset;
+        position: relative;
+        top: unset;
+        right: unset;
+        opacity: 1;
+    }
+
+    .navClosed {
+        opacity: 1;
+        transform: unset;
+        transition: unset;
+    }
+
+    .nav__div:nth-child(1) {
+        display: none;
+    }
+
+    .nav__ul {
+        padding-top: 1rem;
+        gap: 1rem;
+    }
 }
 
 /* Desktop */
 
 @media (min-width: 1024px) {
+    .header__logo {
+        width: 10%;
+    }
 }

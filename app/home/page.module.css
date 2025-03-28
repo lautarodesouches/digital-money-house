@@ -6,7 +6,7 @@ body {
 .main {
     flex: 1;
     background: #eeeaea;
-    padding: 5% 5% 10% 5%; 
+    padding: 5% 5% 10% 5%;
 }
 
 .top {
@@ -77,6 +77,7 @@ body {
 }
 
 .buttons__btn {
+    cursor: pointer;
     font-size: 1.1rem;
     width: 100%;
     border: none;
@@ -155,7 +156,7 @@ body {
 }
 
 .active__text {
-    font-size: .9rem;
+    font-size: 0.9rem;
 }
 
 .active__start {
@@ -167,7 +168,7 @@ body {
 .active__end {
     display: flex;
     flex-direction: column;
-    gap: .25rem;
+    gap: 0.25rem;
     align-items: flex-end;
 }
 
@@ -176,7 +177,7 @@ body {
 }
 
 .active__bottom {
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: var(--dark);
 }
 
@@ -188,7 +189,7 @@ body {
 }
 
 .activity__link {
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: bold;
 }
 
@@ -196,4 +197,57 @@ body {
     height: 25px;
     width: 25px;
     fill: #828282;
+}
+
+@media (min-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas:
+            'header header'
+            'nav main'
+            'footer footer';
+    }
+    
+    .main{
+        grid-area: main;
+    }
+    
+    .footer{
+        grid-area: footer;
+    }
+
+    .top{
+        display: none;
+    }
+
+    .card{
+        margin: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .card__text{
+        font-size: 1rem;
+         font-weight: 700;
+    }
+
+    .card__number{
+        font-size: 2rem;
+    }
+
+    .card__link{
+        font-size: .9rem;
+    }
+
+    .buttons{
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .buttons__link{
+        flex: 1;
+    }
 }
