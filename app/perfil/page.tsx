@@ -1,22 +1,67 @@
-'use client'
 import { Footer, Menu } from '@/components'
 import styles from './page.module.css'
-import { useRef } from 'react'
-export default function Perfil() {
-    const refs = useRef<Record<string, HTMLElement | null>>({}) // Almacena referencias dinámicamente
+import Data from './data'
+import { cookies } from 'next/headers'
 
-    const dataItems = [
-        { label: 'CVU', value: '0000002100075320000000' },
-        { label: 'Alias', value: 'estealiasnoexiste' },
-    ]
+interface Account {
+    id: number
+    user_id: number
+    cvu: string
+    alias: string
+    available_amount: number
+}
 
-    const copyToClipboard = (key: string) => {        
-        if (refs.current[key]) {
-            navigator.clipboard
-                .writeText(refs.current[key].innerText)
-                .then(() => alert(`${key} copiado!`)) // Opcional
-                .catch(err => console.error('Error al copiar: ', err))
+interface DataUser {
+    dni: number
+    email: string
+    firstname: string
+    lastname: string
+    password: string
+    phone: string
+}
+
+export default async function Perfil() {
+    const cookieStore = await cookies()
+    const token = cookieStore.get('token')
+
+    const response_account = await fetch(
+        'https://digitalmoney.digitalhouse.com/api/account',
+        {
+            method: 'GET',
+            headers: {
+                Authorization: token?.value || '',
+                accept: 'application/json',
+            },
         }
+    )
+
+    const account: Account = await response_account.json()
+
+    const response_data = await fetch(
+        `https://digitalmoney.digitalhouse.com/api/users/${account.user_id}`,
+        {
+            method: 'GET',
+            headers: {
+                Authorization: token?.value || '',
+                accept: 'application/json',
+            },
+        }
+    )
+
+    const dataUser: DataUser = await response_data.json()
+
+    console.log({dataUser});
+    
+
+    const user = {
+        user_id: account.user_id,
+        cvu: account.cvu,
+        alias: account.alias,
+        email: dataUser.email,
+        firstname: dataUser.firstname,
+        lastname: dataUser.lastname,
+        cuit: '990482929064819024',
+        phone: dataUser.phone,
     }
 
     return (
@@ -40,35 +85,35 @@ export default function Perfil() {
                             id: 'email',
                             label: 'Email',
                             type: 'email',
-                            value: 'mauriciobrito@digitalhouse.com',
+                            value: user.email,
                         },
                         {
                             id: 'name',
                             label: 'Nombre y apellido',
                             type: 'text',
                             hasIcon: true,
-                            value: 'Mauricio Brito',
+                            value: user.firstname,
                         },
                         {
                             id: 'cuit',
                             label: 'CUIT',
                             type: 'number',
                             hasIcon: true,
-                            value: '20350269798',
+                            value: user.cuit,
                         },
                         {
                             id: 'phone',
                             label: 'Teléfono',
                             type: 'tel',
                             hasIcon: true,
-                            value: '1146730989',
+                            value: user.phone,
                         },
                         {
                             id: 'password',
                             label: 'Contraseña',
                             type: 'password',
                             hasIcon: true,
-                            value: 'test',
+                            value: '1234567890',
                         },
                     ].map(({ id, label, type, hasIcon, value }) => (
                         <div key={id} className={styles.info__group}>
@@ -106,47 +151,7 @@ export default function Perfil() {
                         </svg>
                     </button>
                 </section>
-                <section className={styles.data}>
-                    <p className={styles.data__title}>
-                        Copia tu cvu o alias para ingresar o transferir dinero
-                        desde otra cuenta
-                    </p>
-                    {dataItems.map(({ label, value }) => (
-                        <div key={label} className={styles.data__container}>
-                            <div className={styles.data__div}>
-                                <p className={styles.data__text}>{label}</p>
-                            </div>
-                            <div className={styles.data__div}>
-                                <svg
-                                    className={styles.data__svg}
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    onClick={() => copyToClipboard(label)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <path
-                                        d="M21 7.5V21H7.5V7.5H21ZM21 6H7.5C7.10218 6 6.72064 6.15804 6.43934 6.43934C6.15804 6.72064 6 7.10218 6 7.5V21C6 21.3978 6.15804 21.7794 6.43934 22.0607C6.72064 22.342 7.10218 22.5 7.5 22.5H21C21.3978 22.5 21.7794 22.342 22.0607 22.0607C22.342 21.7794 22.5 21.3978 22.5 21V7.5C22.5 7.10218 22.342 6.72064 22.0607 6.43934C21.7794 6.15804 21.3978 6 21 6Z"
-                                        fill="#C1FD35"
-                                    />
-                                    <path
-                                        d="M3 13.5H1.5V3C1.5 2.60218 1.65804 2.22064 1.93934 1.93934C2.22064 1.65804 2.60218 1.5 3 1.5H13.5V3H3V13.5Z"
-                                        fill="#C1FD35"
-                                    />
-                                </svg>
-                            </div>
-                            <div className={styles.data__div}>
-                                <p
-                                    ref={el => {
-                                        refs.current[label] = el;
-                                    }}
-                                    className={styles.data__number}
-                                >
-                                    {value}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </section>
+                <Data cvu={user.cvu} alias={user.alias} />
             </main>
             <Footer />
         </>
