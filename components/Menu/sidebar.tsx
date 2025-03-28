@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import styles from './styles.module.css'
 import { ROUTES } from '@/routes'
 import Link from 'next/link'
@@ -17,6 +17,9 @@ export default function SideBar({
 }: Props) {
     const menuRef = useRef<HTMLDivElement>(null)
     const router = useRouter()
+    const pathname = usePathname()
+
+    console.log(pathname ==='/inicio')
 
     // Cierra el menú solo si está abierto y se hace clic fuera de él
     useEffect(() => {
@@ -68,27 +71,31 @@ export default function SideBar({
             </div>
             <div className={styles.nav__div}>
                 <ul className={styles.nav__ul}>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.INICIO}>Inicio</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.INICIO}>Actividad</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.PERFIL}>Tu perfil</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.INICIO}>Cargar dinero</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.INICIO}>Pagar servicios</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href={ROUTES.TARJETAS}>Tarjetas</Link>
-                    </li>
-                    <li className={styles.nav__li}>
-                        <Link href='/cerrar-sesion' onClick={handleLogout}>Cerrar sesión</Link>
-                    </li>
+                    {[
+                        { name: 'Inicio', path: ROUTES.INICIO },
+                        { name: 'Actividad', path: ROUTES.LANDING },
+                        { name: 'Tu perfil', path: ROUTES.PERFIL },
+                        { name: 'Cargar dinero', path: ROUTES.LANDING },
+                        { name: 'Pagar servicios', path: ROUTES.LANDING },
+                        { name: 'Tarjetas', path: ROUTES.TARJETAS },
+                        {
+                            name: 'Cerrar sesión',
+                            path: '/cerrar-sesion',
+                            onClick: handleLogout,
+                        },
+                    ].map(({ name, path, onClick }) => (
+                        <li key={name} className={styles.nav__li}>
+                            <Link
+                                href={path}
+                                onClick={onClick}
+                                className={
+                                    pathname === path ? styles.nav__active : ''
+                                }
+                            >
+                                {name}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </nav>

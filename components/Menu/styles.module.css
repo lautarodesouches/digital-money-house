@@ -150,6 +150,10 @@
     color: var(--dark);
 }
 
+.nav__active{
+    font-weight: bold;
+}
+
 /* Tablet */
 
 @media (min-width: 768px) {
