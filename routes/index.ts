@@ -1,7 +1,9 @@
 export const ROUTES = {
     LANDING: '/landing',
-    INGRESO: '/ingreso',
+    INICIAR_SESION: '/iniciar-sesion',
     CREAR_CUENTA: '/crear-cuenta',
     CREAR_CUENTA_EXITO: '/crear-cuenta/exito',
-    INICIO: '/home'
+    INICIO: '/inicio',
+    PERFIL: '/perfil',
+    TARJETAS: '/tarjetas'
 }

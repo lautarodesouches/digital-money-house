@@ -107,7 +107,7 @@ export default function Create() {
                     </Link>
                 </div>
                 <nav className={styles.header__nav}>
-                    <Link className={styles.header__link} href={ROUTES.INGRESO}>
+                    <Link className={styles.header__link} href={ROUTES.INICIAR_SESION}>
                         <button className={styles.header__login}>
                             Iniciar sesión
                         </button>

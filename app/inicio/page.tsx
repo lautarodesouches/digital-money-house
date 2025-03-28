@@ -70,7 +70,7 @@ export default function Home() {
                 </article>
                 <div className={styles.buttons}>
                     <Link
-                        href={ROUTES.INGRESO}
+                        href={ROUTES.INICIAR_SESION}
                         className={styles.buttons__link}
                     >
                         <button className={styles.buttons__btn}>
@@ -78,7 +78,7 @@ export default function Home() {
                         </button>
                     </Link>
                     <Link
-                        href={ROUTES.INGRESO}
+                        href={ROUTES.INICIAR_SESION}
                         className={styles.buttons__link}
                     >
                         <button className={styles.buttons__btn}>

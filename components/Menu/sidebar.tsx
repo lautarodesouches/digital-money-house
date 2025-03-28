@@ -37,7 +37,8 @@ export default function SideBar({
         }
     }, [isMenuActive, handleMenuClick])
 
-    const handleLogout = async () => {
+    const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault()
         await fetch('/api/logout')
         router.push(ROUTES.LANDING)
     }
@@ -68,25 +69,25 @@ export default function SideBar({
             <div className={styles.nav__div}>
                 <ul className={styles.nav__ul}>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Inicio</Link>
+                        <Link href={ROUTES.INICIO}>Inicio</Link>
                     </li>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Actividad</Link>
+                        <Link href={ROUTES.INICIO}>Actividad</Link>
                     </li>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Tu perfil</Link>
+                        <Link href={ROUTES.PERFIL}>Tu perfil</Link>
                     </li>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Cargar dinero</Link>
+                        <Link href={ROUTES.INICIO}>Cargar dinero</Link>
                     </li>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Pagar servicios</Link>
+                        <Link href={ROUTES.INICIO}>Pagar servicios</Link>
                     </li>
                     <li className={styles.nav__li}>
-                        <Link href={ROUTES.LANDING}>Tarjetas</Link>
+                        <Link href={ROUTES.TARJETAS}>Tarjetas</Link>
                     </li>
-                    <li className={styles.nav__li} onClick={handleLogout}>
-                        Cerrar sesión
+                    <li className={styles.nav__li}>
+                        <Link href='/cerrar-sesion' onClick={handleLogout}>Cerrar sesión</Link>
                     </li>
                 </ul>
             </div>

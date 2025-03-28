@@ -20,7 +20,7 @@ export default function Exito() {
                     </Link>
                 </div>
                 <nav className={styles.header__nav}>
-                    <Link className={styles.header__link} href={ROUTES.INGRESO}>
+                    <Link className={styles.header__link} href={ROUTES.INICIAR_SESION}>
                         <button className={styles.header__login}>
                             Iniciar sesión
                         </button>
@@ -46,7 +46,7 @@ export default function Exito() {
                         </clipPath>
                     </defs>
                 </svg>
-                <Link className={styles.exito__link} href={`${ROUTES.INGRESO}?exito=1`}>
+                <Link className={styles.exito__link} href={`${ROUTES.INICIAR_SESION}?exito=1`}>
                     <button className={styles.exito__button}>Continuar</button>
                 </Link>
             </main>

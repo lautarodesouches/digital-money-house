@@ -40,7 +40,7 @@ export default function Header({
                 <div className={styles.header__div}>
                     <Link
                         className={styles.header__link}
-                        href={ROUTES.INGRESO}
+                        href={ROUTES.INICIAR_SESION}
                     >
                         <button className={styles.header__login}>
                             Ingresar
