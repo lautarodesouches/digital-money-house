@@ -19,8 +19,6 @@ export default function SideBar({
     const router = useRouter()
     const pathname = usePathname()
 
-    console.log(pathname ==='/inicio')
-
     // Cierra el menú solo si está abierto y se hace clic fuera de él
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

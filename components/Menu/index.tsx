@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 import SideBar from './sidebar'
 
 interface Props {
-    name: string
+    name?: string
 }
 
 export default function Header({ name = 'Mauricio Brito' }: Props) {

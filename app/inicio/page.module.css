@@ -4,6 +4,7 @@ body {
 }
 
 .main {
+    grid-area: main;
     flex: 1;
     background: #eeeaea;
     padding: 5% 5% 10% 5%;
@@ -208,14 +209,6 @@ body {
             'header header'
             'nav main'
             'footer footer';
-    }
-    
-    .main{
-        grid-area: main;
-    }
-    
-    .footer{
-        grid-area: footer;
     }
 
     .top{
