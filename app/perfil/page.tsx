@@ -1,31 +1,17 @@
+'use server'
 import { Footer, Menu } from '@/components'
 import styles from './page.module.css'
 import Data from './data'
 import { cookies } from 'next/headers'
-
-interface Account {
-    id: number
-    user_id: number
-    cvu: string
-    alias: string
-    available_amount: number
-}
-
-interface DataUser {
-    dni: number
-    email: string
-    firstname: string
-    lastname: string
-    password: string
-    phone: string
-}
+import { AccountType, UserType } from '@/interfaces'
+import { API_URL } from '@/constants'
 
 export default async function Perfil() {
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
 
     const response_account = await fetch(
-        'https://digitalmoney.digitalhouse.com/api/account',
+        `${API_URL}/api/account`,
         {
             method: 'GET',
             headers: {
@@ -35,10 +21,10 @@ export default async function Perfil() {
         }
     )
 
-    const account: Account = await response_account.json()
+    const account: AccountType = await response_account.json()
 
     const response_data = await fetch(
-        `https://digitalmoney.digitalhouse.com/api/users/${account.user_id}`,
+        `${API_URL}/api/users/${account.user_id}`,
         {
             method: 'GET',
             headers: {
@@ -48,10 +34,7 @@ export default async function Perfil() {
         }
     )
 
-    const dataUser: DataUser = await response_data.json()
-
-    console.log({dataUser});
-    
+    const dataUser: UserType = await response_data.json()
 
     const user = {
         user_id: account.user_id,
@@ -60,13 +43,13 @@ export default async function Perfil() {
         email: dataUser.email,
         firstname: dataUser.firstname,
         lastname: dataUser.lastname,
-        cuit: '990482929064819024',
+        dni: dataUser.dni,
         phone: dataUser.phone,
     }
 
     return (
-        <>
-            <Menu />
+        <div className={styles.container}>
+            <Menu token={token} />
             <main className={styles.main}>
                 <section className={styles.top}>
                     <svg
@@ -95,11 +78,11 @@ export default async function Perfil() {
                             value: user.firstname,
                         },
                         {
-                            id: 'cuit',
-                            label: 'CUIT',
+                            id: 'dni',
+                            label: 'DNI',
                             type: 'number',
                             hasIcon: true,
-                            value: user.cuit,
+                            value: user.dni,
                         },
                         {
                             id: 'phone',
@@ -154,6 +137,6 @@ export default async function Perfil() {
                 <Data cvu={user.cvu} alias={user.alias} />
             </main>
             <Footer />
-        </>
+        </div>
     )
 }

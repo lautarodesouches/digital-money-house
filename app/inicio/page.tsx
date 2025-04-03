@@ -1,10 +1,14 @@
-'use client'
+'use server'
 import Link from 'next/link'
 import styles from './page.module.css'
 import { Footer, Menu } from '@/components'
 import { ROUTES } from '@/routes'
+import { cookies } from 'next/headers'
 
-export default function Home() {
+export default async function Home() {
+    const cookieStore = await cookies()
+    const token = cookieStore.get('token')
+
     const activity = [
         {
             title: 'Transferiste a Rodrigo',
@@ -30,7 +34,7 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
-            <Menu name="Manuel Brito" />
+            <Menu token={token} />
             <main className={styles.main}>
                 <section className={styles.top}>
                     <svg
@@ -40,9 +44,7 @@ export default function Home() {
                     >
                         <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
                     </svg>
-                    <p className={styles.top__text}>
-                        Inicio
-                    </p>
+                    <p className={styles.top__text}>Inicio</p>
                 </section>
                 <article className={styles.card}>
                     <div className={styles.card__div}>
