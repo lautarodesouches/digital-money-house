@@ -4,10 +4,40 @@ import styles from './page.module.css'
 import { Footer, Menu } from '@/components'
 import { ROUTES } from '@/routes'
 import { cookies } from 'next/headers'
+import { API_URL } from '@/constants'
+import { AccountType, TransferType } from '@/interfaces'
 
 export default async function Home() {
     const cookieStore = await cookies()
     const token = cookieStore.get('token')
+
+    console.log(token);
+    
+
+    const response_account = await fetch(`${API_URL}/api/account`, {
+        method: 'GET',
+        headers: {
+            Authorization: token?.value || '',
+            accept: 'application/json',
+        },
+    })
+
+    const account: AccountType = await response_account.json()    
+
+    const response__transfer = await fetch(
+        `${API_URL}/api/accounts/${account.id}/transferences`,
+        {
+            method: 'GET',
+            headers: {
+                Authorization: token?.value || '',
+                accept: 'application/json',
+            },
+        }
+    )
+
+    const transferences: Array<TransferType> = await response__transfer.json()
+
+    console.log({ transferences })
 
     const activity = [
         {
@@ -50,7 +80,7 @@ export default async function Home() {
                     <div className={styles.card__div}>
                         <Link
                             className={styles.card__link}
-                            href={ROUTES.INICIO}
+                            href={ROUTES.TARJETAS}
                         >
                             Ver tarjetas
                         </Link>
