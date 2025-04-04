@@ -1,35 +1,19 @@
 import { List } from '@/components'
 import styles from './page.module.css'
-import { cookies } from 'next/headers'
-import { API_URL } from '@/constants'
-import { AccountType, CardType } from '@/interfaces'
+import { getCards } from '@/services/getCards'
+import { getToken } from '@/services/getToken'
+import { getAccount } from '@/services/getAccount'
+import { ROUTES } from '@/routes'
+import { redirect } from 'next/navigation'
 
-export default async function tarjetas() {
-    const cookieStore = await cookies()
-    const token = cookieStore.get('token')
+export default async function Tarjetas() {
+    const token = await getToken()
 
-    const response_account = await fetch(`${API_URL}/api/account`, {
-        method: 'GET',
-        headers: {
-            Authorization: token?.value || '',
-            accept: 'application/json',
-        },
-    })
+    const account = await getAccount(token)
 
-    const account: AccountType = await response_account.json()
+    if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const response__cards = await fetch(
-        `${API_URL}/api/accounts/${account.id}/cards`,
-        {
-            method: 'GET',
-            headers: {
-                Authorization: token?.value || '',
-                accept: 'application/json',
-            },
-        }
-    )
-
-    const cards: Array<CardType> = await response__cards.json()
+    const cards = await getCards(token, account)
 
     return (
         <>

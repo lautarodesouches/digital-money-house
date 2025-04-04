@@ -1,38 +1,22 @@
-'use server'
 import Link from 'next/link'
 import styles from './page.module.css'
-import { List} from '@/components'
+import { List } from '@/components'
 import { ROUTES } from '@/routes'
-import { cookies } from 'next/headers'
-import { API_URL } from '@/constants'
-import { AccountType, TransferType } from '@/interfaces'
+import { getTransferences } from '@/services/getTransferences'
+import { getAccount } from '@/services/getAccount'
+import { getToken } from '@/services/getToken'
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
-    const cookieStore = await cookies()
-    const token = cookieStore.get('token')
+    const token = await getToken()
 
-    const response_account = await fetch(`${API_URL}/api/account`, {
-        method: 'GET',
-        headers: {
-            Authorization: token?.value || '',
-            accept: 'application/json',
-        },
-    })
+    const account = await getAccount(token)
 
-    const account: AccountType = await response_account.json()
+    if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const response__transfer = await fetch(
-        `${API_URL}/api/accounts/${account.id}/transferences`,
-        {
-            method: 'GET',
-            headers: {
-                Authorization: token?.value || '',
-                accept: 'application/json',
-            },
-        }
-    )
+    const transferences = await getTransferences(token, account)
 
-    const transferences: Array<TransferType> = await response__transfer.json()
+    console.log({ transferences })
 
     const activity = [
         {

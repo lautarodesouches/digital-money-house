@@ -1,47 +1,21 @@
-'use server'
 import styles from './page.module.css'
 import Data from './data'
-import { cookies } from 'next/headers'
-import { AccountType, UserType } from '@/interfaces'
-import { API_URL } from '@/constants'
+import { getUser } from '@/services/getUser'
+import { getAccount } from '@/services/getAccount'
+import { getToken } from '@/services/getToken'
+import { ROUTES } from '@/routes'
+import { redirect } from 'next/navigation'
 
 export default async function Perfil() {
-    const cookieStore = await cookies()
-    const token = cookieStore.get('token')
+    const token = await getToken()
 
-    const response_account = await fetch(`${API_URL}/api/account`, {
-        method: 'GET',
-        headers: {
-            Authorization: token?.value || '',
-            accept: 'application/json',
-        },
-    })
+    const account = await getAccount(token)
 
-    const account: AccountType = await response_account.json()
+    if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const response_data = await fetch(
-        `${API_URL}/api/users/${account.user_id}`,
-        {
-            method: 'GET',
-            headers: {
-                Authorization: token?.value || '',
-                accept: 'application/json',
-            },
-        }
-    )
+    const user = await getUser(token, account.user_id)
 
-    const dataUser: UserType = await response_data.json()
-
-    const user = {
-        user_id: account.user_id,
-        cvu: account.cvu,
-        alias: account.alias,
-        email: dataUser.email,
-        firstname: dataUser.firstname,
-        lastname: dataUser.lastname,
-        dni: dataUser.dni,
-        phone: dataUser.phone,
-    }
+    if (!user) return redirect(ROUTES.INICIAR_SESION)
 
     return (
         <>
@@ -128,7 +102,7 @@ export default async function Perfil() {
                     </svg>
                 </button>
             </section>
-            <Data cvu={user.cvu} alias={user.alias} />
+            <Data cvu={account.cvu} alias={account.alias} />
         </>
     )
 }

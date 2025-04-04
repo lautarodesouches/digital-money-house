@@ -6,20 +6,20 @@ import { getUser } from '@/services/getUser'
 import { ROUTES } from '@/routes'
 import { redirect } from 'next/navigation'
 
-export default async function Layout({
-    children,
-}: Readonly<{
+interface Props {
     children: React.ReactNode
-}>) {
+}
+
+export default async function Layout({ children }: Props) {
     const token = await getToken()
 
     const account = await getAccount(token)
 
-    if (!account) redirect(ROUTES.INICIAR_SESION)
+    if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const user = await getUser(token, account.user_id)    
+    const user = await getUser(token, account.user_id)
 
-    if (!user) redirect(ROUTES.INICIAR_SESION)
+    if (!user) return redirect(ROUTES.INICIAR_SESION)
 
     return (
         <div className={styles.container}>
