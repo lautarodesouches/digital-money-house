@@ -1,70 +1,24 @@
 'use client'
-import { API_URL } from '@/constants'
-import { AccountType, UserType } from '@/interfaces'
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SideBar from './sidebar'
 import styles from './styles.module.css'
 import Logo from '../Logo'
+import { UserType } from '@/interfaces'
 
 interface Props {
-    token: RequestCookie | undefined
+    user: UserType
 }
 
-export default function Menu({ token }: Props) {
+export default function Menu({ user }: Props) {
     const [isMenuActive, setIsMenuActive] = useState(false)
-    const [name, setName] = useState('')
-    const [initials, setInitials] = useState('')
-
-    const getAccountData = async (token: RequestCookie | undefined) => {
-        const response_account = await fetch(`${API_URL}/api/account`, {
-            method: 'GET',
-            headers: {
-                Authorization: token?.value || '',
-                accept: 'application/json',
-            },
-        })
-
-        const account: AccountType = await response_account.json()
-
-        const response_data = await fetch(
-            `${API_URL}/api/users/${account.user_id}`,
-            {
-                method: 'GET',
-                headers: {
-                    Authorization: token?.value || '',
-                    accept: 'application/json',
-                },
-            }
-        )
-
-        const dataUser: UserType = await response_data.json()
-
-        setName(`${dataUser.firstname} ${dataUser.lastname}`)
-    }
+    
+    const name = `${user.firstname} ${user.lastname}`
+    
+    const initials = `${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`
 
     const handleMenuClick = () => {
         setIsMenuActive(prevState => !prevState)
     }
-
-    useEffect(() => {
-        getAccountData(token)
-    }, [token])
-
-    const getInitials = (name: string) => {
-        const initials = name
-            ? name
-                  .split(' ') // Divide el nombre en palabras
-                  .map(word => word[0].toUpperCase()) // Toma la primera letra de cada palabra y la pone en mayúscula
-                  .join('') // Une las iniciales en una sola cadena
-            : ''
-
-        setInitials(initials)
-    }
-
-    useEffect(() => {
-        getInitials(name)
-    }, [name])
 
     return (
         <>

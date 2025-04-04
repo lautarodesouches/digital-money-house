@@ -70,12 +70,12 @@ export default function SideBar({
             <div className={styles.nav__div}>
                 <ul className={styles.nav__ul}>
                     {[
-                        { name: 'Inicio', path: ROUTES.INICIO },
-                        { name: 'Actividad', path: ROUTES.LANDING },
-                        { name: 'Tu perfil', path: ROUTES.PERFIL },
-                        { name: 'Cargar dinero', path: ROUTES.LANDING },
-                        { name: 'Pagar servicios', path: ROUTES.LANDING },
-                        { name: 'Tarjetas', path: ROUTES.TARJETAS },
+                        { name: 'Inicio', path: ROUTES.INICIO, onClick: handleMenuClick},
+                        { name: 'Actividad', path: ROUTES.LANDING, onClick: handleMenuClick },
+                        { name: 'Tu perfil', path: ROUTES.PERFIL, onClick: handleMenuClick },
+                        { name: 'Cargar dinero', path: ROUTES.LANDING, onClick: handleMenuClick },
+                        { name: 'Pagar servicios', path: ROUTES.LANDING, onClick: handleMenuClick },
+                        { name: 'Tarjetas', path: ROUTES.TARJETAS, onClick: handleMenuClick },
                         {
                             name: 'Cerrar sesión',
                             path: '/cerrar-sesion',

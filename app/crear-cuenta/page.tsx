@@ -3,11 +3,11 @@ import { Footer } from '@/components'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../../routes'
-import { startTransition, useActionState, useEffect, useState } from 'react'
+import { startTransition, useActionState, useState } from 'react'
 import { register } from './actions'
 
 export default function Create() {
-    const [state, formAction] = useActionState(register, null)
+    const [, formAction] = useActionState(register, null)
 
     const [dni, setDni] = useState('')
     const [firstname, setFirstname] = useState('')
@@ -86,10 +86,6 @@ export default function Create() {
             formAction(formData)
         })
     }
-
-    useEffect(() => {
-        console.log({ state })
-    }, [state])
 
     return (
         <>

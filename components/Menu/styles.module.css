@@ -41,6 +41,7 @@
 
 .header__grettings {
     display: none;
+    text-transform: capitalize;
 }
 
 .header__container {
