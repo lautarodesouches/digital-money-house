@@ -4,17 +4,6 @@ import { redirect } from 'next/navigation'
 import { API_URL } from '../../constants'
 import { ROUTES } from '../../routes'
 
-const getUserId = async (token: string) => {
-    const response = await fetch(`${API_URL}/api/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    })
-
-    const json = await response.json()
-}
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function login(prevState: any, formData: FormData) {
     const cookieStore = await cookies()

@@ -1,45 +1,65 @@
+'use client'
+import parse from 'html-react-parser'
+import { useEffect, useState } from 'react'
 import styles from './page.module.css'
 import { Footer, Header } from '@/components'
 
-export default function Home() {
+type Feature = {
+    title: string
+    description: string
+}
+
+type Content = {
+    title: string
+    subtitle: string
+    features: Feature[]
+}
+
+export default function Landing() {
+    const [content, setContent] = useState<Content>({
+        title: '',
+        subtitle: '',
+        features: [],
+    })
+
+    const fetchContent = async () => {
+        const res = await fetch('/api/landing')
+
+        if (!res.ok) throw new Error('Failed to fetch data')
+
+        const data: Content = await res.json()
+
+        setContent(data)
+    }
+
+    useEffect(() => {
+        fetchContent()
+    }, [])
+
     return (
         <>
             <Header />
             <main className={styles.main}>
                 <section className={styles.top}>
-                    <h1 className={styles.top__title}>
-                        De ahora en adelante, hacés más con tu dinero
-                    </h1>
+                    <h1 className={styles.top__title}>{content.title}</h1>
                     <hr className={styles.top__hr} />
                     <h2 className={styles.top__subtitle}>
-                        Tu nueva{' '}
-                        <strong className={styles.top__light}>
-                            billetera virtual
-                        </strong>
+                        {parse(content.subtitle)}
                     </h2>
                 </section>
+
                 <section className={styles.content}>
-                    <article className={styles.content__art}>
-                        <h3 className={styles.content__h3}>Transferí dinero</h3>
-                        <hr className={styles.content__hr} />
-                        <p className={styles.content__p}>
-                            Desde Digital Money House vas a poder transferir
-                            dinero a otras cuentas, asi como también recibir
-                            transferencias y nuclear tu capital en nuestra
-                            billetera virtual.
-                        </p>
-                    </article>
-                    <article className={styles.content__art}>
-                        <h3 className={styles.content__h3}>
-                            Pago de servicios
-                        </h3>
-                        <hr className={styles.content__hr} />
-                        <p className={styles.content__p}>
-                            Pagá mensualmente los servicios en 3 simples clicks.
-                            Facil, rápido y conveniente. Olvidate de las
-                            facturas en papel.
-                        </p>
-                    </article>
+                    {content.features.map((feature, i) => (
+                        <article className={styles.content__art} key={i}>
+                            <h3 className={styles.content__h3}>
+                                {feature.title}
+                            </h3>
+                            <hr className={styles.content__hr} />
+                            <p className={styles.content__p}>
+                                {feature.description}
+                            </p>
+                        </article>
+                    ))}
                     <aside className={styles.background}></aside>
                 </section>
             </main>
