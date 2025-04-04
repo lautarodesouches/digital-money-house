@@ -1,10 +1,9 @@
-import { List } from '@/components'
 import styles from './page.module.css'
-import { getCards } from '@/services/getCards'
 import { getToken } from '@/services/getToken'
 import { getAccount } from '@/services/getAccount'
 import { ROUTES } from '@/routes'
 import { redirect } from 'next/navigation'
+import Cards from './cards'
 
 export default async function Tarjetas() {
     const token = await getToken()
@@ -12,8 +11,6 @@ export default async function Tarjetas() {
     const account = await getAccount(token)
 
     if (!account) return redirect(ROUTES.INICIAR_SESION)
-
-    const cards = await getCards(token, account)
 
     return (
         <>
@@ -51,16 +48,7 @@ export default async function Tarjetas() {
                     </svg>
                 </div>
             </section>
-            <List
-                title="Tus tarjetas"
-                content={cards}
-                center={card =>
-                    `Terminada en ${card.number_id.toString().slice(-4)}`
-                }
-                right={() => (
-                    <button className={styles.cards__button}>Eliminar</button>
-                )}
-            />
+            <Cards token={token} account={account} />
         </>
     )
 }
