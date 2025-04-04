@@ -84,26 +84,6 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Animaciones de entrada */
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0%);
-    }
-}
-
-/* Animaciones de salida */
-@keyframes slideOut {
-    from {
-        transform: translateX(0%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
 .nav__div {
     padding: 10%;
 }
@@ -183,6 +163,12 @@
         top: unset;
         right: unset;
         opacity: 1;
+    }
+
+    .navOpen {
+        opacity: 1;
+        transform: unset;
+        transition: unset;
     }
 
     .navClosed {
