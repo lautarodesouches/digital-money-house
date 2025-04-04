@@ -52,8 +52,6 @@ export default function Menu({ token }: Props) {
     }, [token])
 
     const getInitials = (name: string) => {
-        console.log({ name })
-
         const initials = name
             ? name
                   .split(' ') // Divide el nombre en palabras
