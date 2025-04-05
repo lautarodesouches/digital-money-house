@@ -8,7 +8,7 @@ interface LandingType {
 }
 
 export async function getLandingContent(): Promise<LandingType> {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/landing`, {
+    const response = await fetch(`${process.env.BASE_URL}/api/landing`, {
         method: 'GET',
         headers: {
             accept: 'application/json',
