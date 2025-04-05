@@ -1,14 +1,14 @@
 import { AccountType, TransferType } from '@/interfaces'
 import { API_URL } from '@/constants'
 
-export async function getTransferences(token: string, account: AccountType): Promise<Array<TransferType> | null> {
+export async function getActivity(token: string, account: AccountType): Promise<TransferType[]> {
 
     if (!token) {
         console.error('No hay token disponible')
-        return null
+        return []
     }
 
-    const response = await fetch(`${API_URL}/api/accounts/${account.id}/transferences`, {
+    const response = await fetch(`${API_URL}/api/accounts/${account.id}/activity`, {
         method: 'GET',
         headers: {
             Authorization: token,
@@ -18,7 +18,7 @@ export async function getTransferences(token: string, account: AccountType): Pro
 
     if (!response.ok) {
         console.error('Error al obtener la cuenta:', response.status)
-        return null
+        return []
     }
 
     return response.json()

@@ -1,7 +1,7 @@
 import { AccountType, CardType } from '@/interfaces'
 import { API_URL } from '@/constants'
 
-export async function getCards(token: string, account: AccountType): Promise<Array<CardType> | []> {
+export async function getCards(token: string, account: AccountType): Promise<CardType[]> {
 
     if (!token) {
         console.error('No hay token disponible')

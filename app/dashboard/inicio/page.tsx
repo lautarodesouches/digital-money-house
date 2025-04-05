@@ -2,10 +2,12 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import { List } from '@/components'
 import { ROUTES } from '@/routes'
-import { getTransferences } from '@/services/getTransferences'
+import { getActivity } from '@/services/getActivity'
 import { getAccount } from '@/services/getAccount'
 import { getToken } from '@/services/getToken'
 import { redirect } from 'next/navigation'
+import { getWeekday } from '@/utils/getWeekday'
+import { formatNumber } from '@/utils/formatNumber'
 
 export default async function Home() {
     const token = await getToken()
@@ -14,33 +16,8 @@ export default async function Home() {
 
     if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const transferences = await getTransferences(token, account)
-
-    console.log({ transferences })
-
-    const activity = [
-        {
-            title: 'Transferiste a Rodrigo',
-            amount: '-1265,57',
-            date: 'Sábado',
-        },
-        {
-            title: 'Transfereriste a Consorcio',
-            amount: '-1265,57',
-            date: 'Viernes',
-        },
-        {
-            title: 'Ingresaste dinero',
-            amount: '1265,57',
-            date: 'Viernes',
-        },
-        {
-            title: 'Te transfirieron dinero',
-            amount: '1265,57',
-            date: 'Lunes',
-        },
-    ]
-
+    const activity = await getActivity(token, account)
+    
     return (
         <>
             <section className={styles.top}>
@@ -58,7 +35,7 @@ export default async function Home() {
                     <Link className={styles.card__link} href={ROUTES.TARJETAS}>
                         Ver tarjetas
                     </Link>
-                    <Link className={styles.card__link} href={ROUTES.INICIO}>
+                    <Link className={styles.card__link} href={ROUTES.PERFIL}>
                         Ver CVU
                     </Link>
                 </div>
@@ -66,7 +43,9 @@ export default async function Home() {
                     <h3 className={styles.card__text}>Dinero disponible</h3>
                 </div>
                 <div className={styles.card__div}>
-                    <span className={styles.card__number}>$ 6.890.534,17</span>
+                    <span className={styles.card__number}>
+                        $ {formatNumber(account.available_amount)}
+                    </span>
                 </div>
             </article>
             <div className={styles.buttons}>
@@ -104,14 +83,16 @@ export default async function Home() {
             <List
                 title="Tu actividad"
                 content={activity}
-                center={activity => activity.title}
+                center={activity => activity.description}
                 right={activity => (
                     <>
                         <p className={styles.active__top}>
-                            {parseInt(activity.amount) < 0 ? '-$' : '$'}
-                            {Math.abs(parseInt(activity.amount))}
+                            {activity.amount < 0 ? '-$' : '$'}
+                            {Math.abs(activity.amount)}
                         </p>
-                        <p className={styles.active__bottom}>{activity.date}</p>
+                        <p className={styles.active__bottom}>
+                            {getWeekday(activity.dated)}
+                        </p>
                     </>
                 )}
                 bottom={
