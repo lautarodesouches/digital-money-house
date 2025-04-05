@@ -1,40 +1,10 @@
-'use client'
 import parse from 'html-react-parser'
-import { useEffect, useState } from 'react'
 import styles from './page.module.css'
 import { Footer, Header } from '@/components'
+import { getLandingContent } from '@/services/getLandingContent'
 
-type Feature = {
-    title: string
-    description: string
-}
-
-type Content = {
-    title: string
-    subtitle: string
-    features: Feature[]
-}
-
-export default function Landing() {
-    const [content, setContent] = useState<Content>({
-        title: '',
-        subtitle: '',
-        features: [],
-    })
-
-    const fetchContent = async () => {
-        const res = await fetch('/api/landing')
-
-        if (!res.ok) throw new Error('Failed to fetch data')
-
-        const data: Content = await res.json()
-
-        setContent(data)
-    }
-
-    useEffect(() => {
-        fetchContent()
-    }, [])
+export default async function Landing() {
+    const content = await getLandingContent()
 
     return (
         <>
