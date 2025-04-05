@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
     if (
         (request.nextUrl.pathname !== ROUTES.LANDING &&
             request.nextUrl.pathname !== ROUTES.INICIAR_SESION &&
-            request.nextUrl.pathname !== ROUTES.CREAR_CUENTA) &&
+            request.nextUrl.pathname !== ROUTES.CREAR_CUENTA &&
+            request.nextUrl.pathname !== ROUTES.CREAR_CUENTA_EXITO) &&
         !token
     ) {
         return NextResponse.redirect(new URL(ROUTES.LANDING, request.url))

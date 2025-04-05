@@ -3,8 +3,9 @@ import { Footer } from '@/components'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../../routes'
-import { startTransition, useActionState, useState } from 'react'
+import { startTransition, useActionState, useCallback, useEffect, useMemo, useState } from 'react'
 import { register } from './actions'
+import { formatDni } from '@/utils/formatDni'
 
 export default function Create() {
     const [, formAction] = useActionState(register, null)
@@ -18,21 +19,17 @@ export default function Create() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [matchError, setMatchError] = useState('')
+
     const [isFormValid, setIsFormValid] = useState(true) // Para verificar si el formulario es válido
 
     // Expresión regular para validar la contraseña
-    const passwordRegex =
-        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/
-
-    // Formatear DNI con puntos cada 3 dígitos
-    const formatDni = (num: string) => {
-        const cleaned = num.replace(/\D/g, '') // Elimina todo lo que no sea número
-        return cleaned.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-    }
+    const passwordRegex = useMemo(
+        () => /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
+        []
+    )
 
     const handleDni = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const formattedValue = formatDni(e.target.value)
-        setDni(formattedValue)
+        setDni(formatDni(e.target.value))
     }
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,17 +58,35 @@ export default function Create() {
         }
     }
 
+    const checkIfFormIsValid = useCallback(() => {
+        return (
+            passwordRegex.test(password) &&
+            password === confirmPassword &&
+            dni.trim().length > 0 &&
+            Boolean(password) &&
+            Boolean(confirmPassword) &&
+            Boolean(firstname) &&
+            Boolean(lastname) &&
+            Boolean(email) &&
+            Boolean(phone)
+        )
+    }, [
+        password,
+        confirmPassword,
+        dni,
+        firstname,
+        lastname,
+        email,
+        phone,
+        passwordRegex,
+    ])
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const isValid =
-            passwordRegex.test(password) &&
-            password === confirmPassword &&
-            !!dni &&
-            !!password &&
-            !!confirmPassword
+        const isValid = checkIfFormIsValid()
 
-        setIsFormValid(isValid)
+        if (!isValid) return setIsFormValid(false)
 
         const formData = new FormData()
 
@@ -86,6 +101,23 @@ export default function Create() {
             formAction(formData)
         })
     }
+
+    useEffect(() => {
+        const isValid = checkIfFormIsValid()
+        setIsFormValid(isValid)
+    }, [
+        firstname,
+        lastname,
+        dni,
+        email,
+        phone,
+        password,
+        confirmPassword,
+        passwordError,
+        matchError,
+        passwordRegex,
+        checkIfFormIsValid,
+    ])
 
     return (
         <>
@@ -103,7 +135,10 @@ export default function Create() {
                     </Link>
                 </div>
                 <nav className={styles.header__nav}>
-                    <Link className={styles.header__link} href={ROUTES.INICIAR_SESION}>
+                    <Link
+                        className={styles.header__link}
+                        href={ROUTES.INICIAR_SESION}
+                    >
                         <button className={styles.header__login}>
                             Iniciar sesión
                         </button>
@@ -113,11 +148,7 @@ export default function Create() {
 
             <main className={styles.main}>
                 <h2 className={styles.main__title}>Crear cuenta</h2>
-                <form
-                    className={styles.main__form}
-                    onSubmit={handleSubmit}
-                    action={formAction}
-                >
+                <form className={styles.main__form} onSubmit={handleSubmit}>
                     <input
                         className={styles.main__input}
                         name="firstname"
