@@ -19,7 +19,7 @@ export async function getUser(token: string, userId: number): Promise<UserType |
     if (!response.ok) {
         console.error('Error al obtener la cuenta:', response.status)
         return null
-    }
+    }    
 
     return response.json()
 }

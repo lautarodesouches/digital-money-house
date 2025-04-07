@@ -6,7 +6,7 @@ interface Props {
     alias: string
 }
 
-export default function Data({ alias, cvu }: Props) {
+export default function CvuAlias({ alias, cvu }: Props) {
     const copyToClipboard = (value: string) => {
         navigator.clipboard.writeText(value)
     }
