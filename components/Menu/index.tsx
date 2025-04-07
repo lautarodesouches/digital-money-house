@@ -4,6 +4,8 @@ import SideBar from './sidebar'
 import styles from './styles.module.css'
 import Logo from '../Logo'
 import { UserType } from '@/interfaces'
+import Link from 'next/link'
+import { ROUTES } from '@/routes'
 
 interface Props {
     user: UserType
@@ -11,10 +13,12 @@ interface Props {
 
 export default function Menu({ user }: Props) {
     const [isMenuActive, setIsMenuActive] = useState(false)
-    
+
     const name = `${user.firstname} ${user.lastname}`
-    
-    const initials = `${user.firstname.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`
+
+    const initials = `${user.firstname.charAt(0).toUpperCase()}${user.lastname
+        .charAt(0)
+        .toUpperCase()}`
 
     const handleMenuClick = () => {
         setIsMenuActive(prevState => !prevState)
@@ -24,13 +28,20 @@ export default function Menu({ user }: Props) {
         <>
             <header className={styles.header}>
                 <div className={styles.header__div}>
-                    <Logo style={styles.header__logo} />
+                    <Link href={ROUTES.INICIO}>
+                        <Logo style={styles.header__logo} />
+                    </Link>
                 </div>
                 <div className={styles.header__div}>
                     <div className={styles.header__box}>
                         <span className={styles.header__name}>{initials}</span>
                     </div>
-                    <div className={styles.header__grettings}>Hola, {name}</div>
+                    <Link
+                        href={ROUTES.INICIO}
+                        className={styles.header__grettings}
+                    >
+                        Hola, {name}
+                    </Link>
                     <div className={styles.header__container}>
                         <svg
                             viewBox="0 0 33 26"
