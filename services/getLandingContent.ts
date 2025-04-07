@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/constants"
+
 interface LandingType {
     title: string
     subtitle: string
@@ -8,7 +10,7 @@ interface LandingType {
 }
 
 export async function getLandingContent(): Promise<LandingType> {
-    const response = await fetch(`${process.env.BASE_URL}/api/landing`, {
+    const response = await fetch(`${BASE_URL}/api/landing`, {
         method: 'GET',
         headers: {
             accept: 'application/json',
