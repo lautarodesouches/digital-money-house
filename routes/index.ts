@@ -6,5 +6,6 @@ export const ROUTES = {
     INICIO: '/dashboard/inicio',
     PERFIL: '/dashboard/perfil',
     TARJETAS: '/dashboard/tarjetas',
+    TARJETAS__NUEVA: '/dashboard/tarjetas/nueva',
     ACTIVIDAD: '/dashboard/actividad'
 }

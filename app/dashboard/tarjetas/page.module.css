@@ -18,7 +18,7 @@
     font-size: 1.1rem;
 }
 
-.add{
+.add {
     background: var(--primary);
     border-radius: 8px;
     padding: 1rem;
@@ -27,71 +27,71 @@
     gap: 1rem;
 }
 
-.add__title{
+.add__title {
     color: #fff;
     font-size: 1rem;
     font-weight: 700;
 }
 
-.add__div{
+.add__div {
     gap: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.add__left{
+.add__left {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.add__svg{
+.add__svg {
     fill: var(--secondary);
     width: 35px;
     height: 35px;
 }
 
-.add__text{
+.add__text {
     justify-self: flex-start;
     color: var(--secondary);
 }
 
-.cards{
+.cards {
     background: #fff;
     border-radius: 8px;
     padding: 1rem;
 }
 
-.cards__title{
+.cards__title {
     font-size: 1rem;
     color: var(--primary);
 }
 
-.cards__div{
+.cards__div {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.cards__art{
+.cards__art {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.cards__circle{
+.cards__circle {
     width: 25px;
     height: 25px;
     fill: var(--secondary);
 }
 
-.cards__text{
+.cards__text {
     font-size: 1rem;
 }
 
-.cards__button{
+.cards__button {
     background: none;
     border: none;
     font-weight: bold;

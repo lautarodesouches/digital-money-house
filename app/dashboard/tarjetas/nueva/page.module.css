@@ -1,0 +1,109 @@
+.top {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.top__arrow {
+    height: 20px;
+    width: 20px;
+    fill: var(--dark);
+}
+
+.top__text {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--dark);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.card {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: #f9f6f6;
+    border-radius: 12px;
+}
+
+.card__card {
+    background: linear-gradient(to bottom right, #eee, #ddd);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card__chip {
+    justify-self: flex-end;
+    width: 40px;
+    height: 30px;
+    background: #D9D9D9;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.card__numbers {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: .5rem;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: #00000080;
+}
+
+.card__info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #00000080;
+}
+
+.card__name {
+    color: #00000080;
+}
+
+.card__expiry {
+    color: #00000080;
+}
+
+.card__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.card__input {
+    padding: 0.75rem;
+    border: 1px solid #b4f5c8;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+.card__input::placeholder {
+    color: #888;
+}
+
+.card__button {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: none;
+    background-color: #ccc;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card__button:hover {
+    background-color: #bbb;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+}
