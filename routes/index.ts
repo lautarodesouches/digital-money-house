@@ -5,5 +5,6 @@ export const ROUTES = {
     CREAR_CUENTA_EXITO: '/crear-cuenta/exito',
     INICIO: '/dashboard/inicio',
     PERFIL: '/dashboard/perfil',
-    TARJETAS: '/dashboard/tarjetas'
+    TARJETAS: '/dashboard/tarjetas',
+    ACTIVIDAD: '/dashboard/actividad'
 }
