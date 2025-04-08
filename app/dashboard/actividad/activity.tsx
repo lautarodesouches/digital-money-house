@@ -4,6 +4,7 @@ import { TransferType } from '@/interfaces'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Filter from './filter'
+import { ROUTES } from '@/routes'
 
 interface Props {
     activity: TransferType[]
@@ -76,7 +77,7 @@ export default function Activity({ activity, currentPage, totalPages }: Props) {
                         }/${date.getFullYear()}`
 
                         return (
-                            <article className={styles.active} key={index}>
+                            <article className={styles.active} key={index} onClick={() => router.push(`${ROUTES.ACTIVIDAD}/${item.id}`)}>
                                 <div className={styles.active__start}>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
