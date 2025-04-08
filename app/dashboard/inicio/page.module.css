@@ -76,31 +76,6 @@
     font-weight: bold;
 }
 
-.search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-.search__icon {
-    position: absolute;
-    left: 10px;
-    width: 18px;
-    height: 18px;
-    fill: #828282;
-}
-
-.search__input {
-    box-shadow: 0px 4px 4px 0px #0000001a;
-    padding: 1rem;
-    width: 100%;
-    padding-left: 35px;
-    font-size: 1rem;
-    border: 1px solid #d2ffec;
-    border-radius: 5px;
-}
-
 .activity {
     padding: 1rem;
     margin-top: 2rem;
@@ -165,7 +140,7 @@
 .active__bottom {
     text-transform: capitalize;
     font-size: 0.9rem;
-    color: var(--dark);
+    color: #00000080;
 }
 
 .activity__bottom {

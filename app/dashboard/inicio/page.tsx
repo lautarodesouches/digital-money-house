@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from './page.module.css'
-import { List } from '@/components'
+import { List, Search } from '@/components'
 import { ROUTES } from '@/routes'
 import { getActivity } from '@/services/getActivity'
 import { getAccount } from '@/services/getAccount'
@@ -8,7 +8,6 @@ import { getToken } from '@/services/getToken'
 import { redirect } from 'next/navigation'
 import { getWeekday } from '@/utils/getWeekday'
 import { formatNumber } from '@/utils/formatNumber'
-import Search from './search'
 
 export default async function Home() {
     const token = await getToken()

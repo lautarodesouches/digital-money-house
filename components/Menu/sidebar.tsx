@@ -71,7 +71,7 @@ export default function SideBar({
                 <ul className={styles.nav__ul}>
                     {[
                         { name: 'Inicio', path: ROUTES.INICIO, onClick: handleMenuClick},
-                        { name: 'Actividad', path: ROUTES.LANDING, onClick: handleMenuClick },
+                        { name: 'Actividad', path: ROUTES.ACTIVIDAD, onClick: handleMenuClick },
                         { name: 'Tu perfil', path: ROUTES.PERFIL, onClick: handleMenuClick },
                         { name: 'Cargar dinero', path: ROUTES.LANDING, onClick: handleMenuClick },
                         { name: 'Pagar servicios', path: ROUTES.LANDING, onClick: handleMenuClick },

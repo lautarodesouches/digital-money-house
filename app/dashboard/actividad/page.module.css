@@ -1,0 +1,177 @@
+.top {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.top__arrow {
+    height: 20px;
+    width: 20px;
+    fill: var(--dark);
+}
+
+.top__text {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--dark);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search__icon {
+    position: absolute;
+    left: 10px;
+    width: 18px;
+    height: 18px;
+    fill: #828282;
+}
+
+.search__input {
+    box-shadow: 0px 4px 4px 0px #0000001a;
+    padding: 1rem;
+    width: 100%;
+    padding-left: 35px;
+    font-size: 1rem;
+    border: 1px solid #d2ffec;
+    border-radius: 5px;
+}
+
+.list {
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.list__title {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.list__content {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    display: flex;
+    width: 100%;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eeeaea;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active:first-child {
+    border-top: 1px solid #eeeaea;
+}
+
+.active__circle {
+    fill: var(--secondary);
+    height: 30px;
+    width: 30px;
+}
+
+.active__text {
+    font-size: 0.9rem;
+}
+
+.active__start {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.active__end {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+}
+
+.active__top {
+    font-size: 1rem;
+}
+
+.active__bottom {
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    color: #00000080;
+}
+
+.list__bottom {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list__link {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.list__svg {
+    height: 25px;
+    width: 25px;
+    fill: #828282;
+}
+
+.list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list__div {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.list__span {
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.list__icon {
+    width: 15px;
+    height: 15px;
+    fill: var(--dark);
+}
+
+.nav {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.nav__button {
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    background: none;
+    color: #000;
+}
+
+.nav__buttonActive {
+    background-color: #eeeaea;
+    border-radius: 8px;
+    width: 25px;
+    height: 25px;
+}
+
+@media (min-width: 768px) {
+}

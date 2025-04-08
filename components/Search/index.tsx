@@ -1,19 +1,28 @@
 'use client'
-import { redirect } from 'next/navigation'
-import styles from './page.module.css'
+import { usePathname, useRouter } from 'next/navigation'
+import styles from './styles.module.css'
 import { ROUTES } from '@/routes'
 
 export default function Search() {
+    const router = useRouter()
+    const pathname = usePathname()
+
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        const query = event.currentTarget.value.trim()
+
         if (event.key !== 'Enter') return
 
-        return redirect(
-            `${ROUTES.ACTIVIDAD}?search=${event.currentTarget.value}`
-        )
+        if (pathname === ROUTES.ACTIVIDAD) {
+            // Ya estás en la ruta: solo actualiza el query param
+            router.push(`?search=${query}`)
+        } else {
+            // Estás en otra ruta: navega a /actividad con el query
+            router.push(`${ROUTES.ACTIVIDAD}?search=${query}`)
+        }
     }
 
     return (
-        <div className={styles.search}>
+        <section className={styles.search}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 -960 960 960"
@@ -27,6 +36,6 @@ export default function Search() {
                 placeholder="Buscar en tu actividad"
                 onKeyDown={handleKeyDown}
             />
-        </div>
+        </section>
     )
 }
