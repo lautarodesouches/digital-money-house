@@ -33,6 +33,18 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #00000080;
+    transition: all 0.3s ease;
+}
+
+.card__active{
+    background: linear-gradient(to bottom right, #201F22, #3c383c);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
 .card__chip {
@@ -44,6 +56,13 @@
     margin-bottom: 1rem;
 }
 
+.card__img{
+    height: 100%!important;
+    width: 100%!important;
+    object-fit: cover!important;
+    border-radius: 4px;
+}
+
 .card__numbers {
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -51,22 +70,12 @@
     gap: .5rem;
     font-size: 1.1rem;
     letter-spacing: 2px;
-    color: #00000080;
 }
 
 .card__info {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: #00000080;
-}
-
-.card__name {
-    color: #00000080;
-}
-
-.card__expiry {
-    color: #00000080;
 }
 
 .card__form {

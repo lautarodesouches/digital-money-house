@@ -1,11 +1,12 @@
 'use client'
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import styles from './page.module.css'
 import { formatCardNumber } from '@/utils/formatCardNumber'
 import formatCardExpiration from '@/utils/formatCardExpiration'
 import { createCard } from '@/services/createCard'
 import { useRouter } from 'next/navigation'
-
+import { getCardType } from '@/utils/getCardType'
+import Image from 'next/image'
 
 interface CardData {
     number_id: string
@@ -32,6 +33,8 @@ export default function Content() {
         expiration_date: '',
         cod: '',
     })
+
+    const [cardType, setCardType] = useState('Unknown')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
@@ -70,11 +73,35 @@ export default function Content() {
         })
     }
 
+    useEffect(() => {
+        setCardType(getCardType(cardData.number_id))
+    }, [cardData.number_id])
+
     return (
         <>
             <section className={styles.card}>
-                <div className={styles.card__card}>
-                    <div className={styles.card__chip} />
+                <div
+                    className={`${
+                        cardType === 'Unknown'
+                            ? styles.card__card
+                            : styles.card__active
+                    }`}
+                >
+                    <div className={styles.card__chip}>
+                        {cardType !== 'Unknown' ? (
+                            <Image
+                                src={`/cards/${getCardType(
+                                    cardData.number_id
+                                )}.svg`}
+                                alt=""
+                                width={25}
+                                height={25}
+                                className={styles.card__img}
+                            />
+                        ) : (
+                            <></>
+                        )}
+                    </div>
                     <div className={styles.card__numbers}>
                         {formatCardNumber(
                             cardData.number_id || '**** **** **** ****'
@@ -98,49 +125,48 @@ export default function Content() {
                         </span>
                     </div>
                 </div>
+                <form className={styles.card__form} action={handleSubmit}>
+                    <input
+                        name="number_id"
+                        className={styles.card__input}
+                        placeholder="Número de la tarjeta*"
+                        type="number"
+                        value={cardData.number_id}
+                        onChange={handleChange}
+                    />
+                    <input
+                        name="first_last_name"
+                        className={styles.card__input}
+                        placeholder="Nombre y apellido*"
+                        type="text"
+                        value={cardData.first_last_name}
+                        onChange={handleChange}
+                    />
+                    <input
+                        name="expiration_date"
+                        className={styles.card__input}
+                        placeholder="Fecha de vencimiento (MMYY)*"
+                        type="text"
+                        value={cardData.expiration_date}
+                        onChange={handleChange}
+                    />
+                    <input
+                        name="cod"
+                        className={styles.card__input}
+                        placeholder="Código de seguridad*"
+                        type="password"
+                        value={cardData.cod}
+                        onChange={handleChange}
+                    />
+                    <button
+                        type="submit"
+                        className={styles.card__button}
+                        disabled={isPending}
+                    >
+                        {isPending ? 'Cargando...' : 'Continuar'}
+                    </button>
+                </form>
             </section>
-
-            <form className={styles.card__form} action={handleSubmit}>
-                <input
-                    name="number_id"
-                    className={styles.card__input}
-                    placeholder="Número de la tarjeta*"
-                    type="number"
-                    value={cardData.number_id}
-                    onChange={handleChange}
-                />
-                <input
-                    name="first_last_name"
-                    className={styles.card__input}
-                    placeholder="Nombre y apellido*"
-                    type="text"
-                    value={cardData.first_last_name}
-                    onChange={handleChange}
-                />
-                <input
-                    name="expiration_date"
-                    className={styles.card__input}
-                    placeholder="Fecha de vencimiento (MMYY)*"
-                    type="text"
-                    value={cardData.expiration_date}
-                    onChange={handleChange}
-                />
-                <input
-                    name="cod"
-                    className={styles.card__input}
-                    placeholder="Código de seguridad*"
-                    type="password"
-                    value={cardData.cod}
-                    onChange={handleChange}
-                />
-                <button
-                    type="submit"
-                    className={styles.card__button}
-                    disabled={isPending}
-                >
-                    {isPending ? 'Cargando...' : 'Continuar'}
-                </button>
-            </form>
         </>
     )
 }
