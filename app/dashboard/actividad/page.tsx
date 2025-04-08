@@ -1,11 +1,11 @@
 import styles from './page.module.css'
 import { getToken } from '@/services/getToken'
 import { getAccount } from '@/services/getAccount'
-import { getActivity } from '@/services/getActivity'
 import { redirect } from 'next/navigation'
 import { ROUTES } from '@/routes'
 import Activity from './activity'
 import { Search } from '@/components'
+import { getActivityFiltered } from '@/services/getActivityFiltered'
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
@@ -14,7 +14,7 @@ export default async function ActivityPage(props: {
 }) {
     const searchParams = await props.searchParams
 
-    const { search, page } = searchParams
+    const { search, page, date} = searchParams
 
     // Token, account info
     const token = await getToken()
@@ -22,22 +22,13 @@ export default async function ActivityPage(props: {
     if (!account) return redirect(ROUTES.INICIAR_SESION)
 
     // Activity
-    const allActivity = await getActivity(token, account)
-
-    // Filter
-    const query = typeof search === 'string' ? search.toLowerCase().trim() : ''
-
-    const filteredActivity = search
-        ? allActivity.filter(item =>
-              item.description.toLowerCase().includes(query)
-          )
-        : allActivity
+    const activity = await getActivityFiltered(token, account, search, date)
 
     // Pagination
     const pageSize = 10
     const currentPage = Math.max(Number(page) || 1, 1)
-    const totalPages = Math.ceil(filteredActivity.length / pageSize)
-    const paginatedActivity = filteredActivity.slice(
+    const totalPages = Math.ceil(activity.length / pageSize)
+    const paginatedActivity = activity.slice(
         (currentPage - 1) * pageSize,
         currentPage * pageSize
     )
