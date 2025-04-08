@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import { List, Search } from '@/components'
 import { ROUTES } from '@/routes'
-import { getActivity } from '@/services/getActivity'
+import { getAllActivity } from '@/services/getAllActivity'
 import { getAccount } from '@/services/getAccount'
 import { getToken } from '@/services/getToken'
 import { redirect } from 'next/navigation'
@@ -16,7 +16,7 @@ export default async function Home() {
 
     if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const activity = await getActivity(token, account)
+    const activity = await getAllActivity(token, account)
 
     activity.length = activity.length > 10 ? 10 : activity.length
 

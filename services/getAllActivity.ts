@@ -1,7 +1,7 @@
 import { AccountType, TransferType } from '@/interfaces'
 import { API_URL } from '@/constants'
 
-export async function getActivity(token: string, account: AccountType): Promise<TransferType[]> {
+export async function getAllActivity(token: string, account: AccountType): Promise<TransferType[]> {
 
     if (!token) {
         console.error('No hay token disponible')

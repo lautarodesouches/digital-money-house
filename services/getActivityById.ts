@@ -1,7 +1,7 @@
-import { API_URL } from '@/constants'
 import { TransferType } from '@/interfaces'
+import { API_URL } from '@/constants'
 
-export async function getTransaciton(
+export async function getActivityById(
     token: string,
     accountId: number,
     transactionId: string
@@ -27,5 +27,12 @@ export async function getTransaciton(
         return null
     }
 
-    return response.json()
+    const activity: TransferType = await response.json()
+
+    if (!activity) {
+        console.error('No se encontró la actividad con el ID proporcionado')
+        return null
+    }
+
+    return activity
 }

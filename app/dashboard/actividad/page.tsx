@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { ROUTES } from '@/routes'
 import Activity from './activity'
 import { Search } from '@/components'
-import { getActivityFiltered } from '@/services/getActivityFiltered'
+import { getAllActivityFiltered } from '@/services/getAllActivityFiltered'
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
@@ -21,7 +21,7 @@ export default async function ActivityPage(props: {
     if (!account) return redirect(ROUTES.INICIAR_SESION)
 
     // Activity
-    const activity = await getActivityFiltered(token, account, search, date)
+    const activity = await getAllActivityFiltered(token, account, search, date)
 
     // Pagination
     const pageSize = 10

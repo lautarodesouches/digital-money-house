@@ -1,15 +1,15 @@
 import { AccountType } from '@/interfaces'
-import { getActivity } from './getActivity'
+import { getAllActivity } from './getAllActivity'
 import { isDateInRange } from '@/utils/isDateInRange'
 
-export async function getActivityFiltered(
+export async function getAllActivityFiltered(
     token: string,
     account: AccountType,
     search: string | string[] | undefined,
     date: string | string[] | undefined
 ) {
     // Fetch
-    const allActivity = await getActivity(token, account)
+    const allActivity = await getAllActivity(token, account)
     
     // Filter
     const query = typeof search === 'string' ? search.toLowerCase().trim() : ''
