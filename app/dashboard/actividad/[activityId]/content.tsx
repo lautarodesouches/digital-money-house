@@ -13,7 +13,6 @@ interface Props {
 export default function Content({ activity }: Props) {
     const pdfRef = useRef<HTMLElement>(null)
 
-    // Functions
     const formatPrettyDate = (dateString: string): string => {
         const date = new Date(dateString)
 
@@ -60,13 +59,15 @@ export default function Content({ activity }: Props) {
                         <p>{formatPrettyDate(activity.dated)}</p>
                     </div>
                     <div className={styles.activity__amount}>
-                        <p>Transferencia de dinero</p>
+                        <p>{activity.description}</p>
                         <p>${activity.amount.toLocaleString('es-AR')}</p>
                     </div>
-                    <div className={styles.activity__info}>
-                        <p>Le transferiste a</p>
-                        <p>{activity.destination}</p>
-                    </div>
+                    {activity.destination && (
+                        <div className={styles.activity__info}>
+                            <p>Le transferiste a</p>
+                            <p>{activity.destination}</p>
+                        </div>
+                    )}
                     <div className={styles.activity__number}>
                         <p>Número de operación</p>
                         <p>{activity.id}</p>
