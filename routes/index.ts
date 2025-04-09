@@ -9,5 +9,7 @@ export const ROUTES = {
     TARJETAS__NUEVA: '/dashboard/tarjetas/nueva',
     ACTIVIDAD: '/dashboard/actividad',
     CARGAR_DINERO: '/dashboard/cargar-dinero',
+    CARGAR_DINERO_TRANSFERENCIA: '/dashboard/cargar-dinero/transferencia',
+    CARGAR_DINERO_TARJETA: '/dashboard/cargar-dinero/tarjeta',
     PAGAR_SERVICIOS: '/dashboard/pagar-servicios',
 }

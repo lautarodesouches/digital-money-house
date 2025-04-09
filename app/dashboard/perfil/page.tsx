@@ -4,8 +4,8 @@ import { getAccount } from '@/services/getAccount'
 import { getToken } from '@/services/getToken'
 import { ROUTES } from '@/routes'
 import { redirect } from 'next/navigation'
-import CvuAlias from './cvuAlias'
 import ProfileInfo from './profileInfo'
+import { CvuAlias } from '@/components'
 
 export default async function Perfil() {
     const token = await getToken()
