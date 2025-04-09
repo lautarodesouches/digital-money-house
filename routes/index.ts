@@ -7,5 +7,7 @@ export const ROUTES = {
     PERFIL: '/dashboard/perfil',
     TARJETAS: '/dashboard/tarjetas',
     TARJETAS__NUEVA: '/dashboard/tarjetas/nueva',
-    ACTIVIDAD: '/dashboard/actividad'
+    ACTIVIDAD: '/dashboard/actividad',
+    CARGAR_DINERO: '/dashboard/cargar-dinero',
+    PAGAR_SERVICIOS: '/dashboard/pagar-servicios',
 }

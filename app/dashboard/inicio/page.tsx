@@ -52,7 +52,7 @@ export default async function Home() {
             </article>
             <div className={styles.buttons}>
                 <Link
-                    href={ROUTES.INICIAR_SESION}
+                    href={ROUTES.CARGAR_DINERO}
                     className={styles.buttons__link}
                 >
                     <button className={styles.buttons__btn}>
@@ -60,7 +60,7 @@ export default async function Home() {
                     </button>
                 </Link>
                 <Link
-                    href={ROUTES.INICIAR_SESION}
+                    href={ROUTES.PAGAR_SERVICIOS}
                     className={styles.buttons__link}
                 >
                     <button className={styles.buttons__btn}>
