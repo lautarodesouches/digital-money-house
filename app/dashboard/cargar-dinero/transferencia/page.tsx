@@ -4,7 +4,7 @@ import { getAccount } from '@/services/getAccount'
 import { getToken } from '@/services/getToken'
 import { redirect } from 'next/navigation'
 
-export default async function Transferencia() {
+export default async function TopUpTransfer() {
     const token = await getToken()
 
     const account = await getAccount(token)
