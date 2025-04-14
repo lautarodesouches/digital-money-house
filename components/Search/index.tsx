@@ -1,26 +1,12 @@
 'use client'
-import { usePathname, useRouter } from 'next/navigation'
 import styles from './styles.module.css'
-import { ROUTES } from '@/routes'
 
-export default function Search() {
-    const router = useRouter()
-    const pathname = usePathname()
+interface Props {
+    placeholder: string
+    handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void
+}
 
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        const query = event.currentTarget.value.trim()
-
-        if (event.key !== 'Enter') return
-
-        if (pathname === ROUTES.ACTIVIDAD) {
-            // Ya estás en la ruta: solo actualiza el query param
-            router.push(`?search=${query}`)
-        } else {
-            // Estás en otra ruta: navega a /actividad con el query
-            router.push(`${ROUTES.ACTIVIDAD}?search=${query}`)
-        }
-    }
-
+export default function Search({ placeholder, handleKeyDown }: Props) {
     return (
         <section className={styles.search}>
             <svg
@@ -33,7 +19,7 @@ export default function Search() {
             <input
                 className={styles.search__input}
                 type="text"
-                placeholder="Buscar en tu actividad"
+                placeholder={placeholder}
                 onKeyDown={handleKeyDown}
             />
         </section>

@@ -51,7 +51,7 @@
 }
 
 .form__link .form__button {
-    background: #cecece;
+    background: var(--grey);
 }
 
 .form__error {

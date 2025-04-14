@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from './page.module.css'
-import { List, Search, Title } from '@/components'
+import { List, SearchActivity, Title } from '@/components'
 import { ROUTES } from '@/routes'
 import { getAllActivity } from '@/services/getAllActivity'
 import { getAccount } from '@/services/getAccount'
@@ -59,7 +59,7 @@ export default async function Home() {
                     </button>
                 </Link>
             </div>
-            <Search />
+            <SearchActivity />
             <List
                 title="Tu actividad"
                 content={activity}

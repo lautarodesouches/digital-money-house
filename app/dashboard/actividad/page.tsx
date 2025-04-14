@@ -3,7 +3,7 @@ import { getAccount } from '@/services/getAccount'
 import { redirect } from 'next/navigation'
 import { ROUTES } from '@/routes'
 import Activity from './activity'
-import { Search } from '@/components'
+import { SearchActivity } from '@/components'
 import { getAllActivityFiltered } from '@/services/getAllActivityFiltered'
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -34,7 +34,7 @@ export default async function ActivityPage(props: {
 
     return (
         <>
-            <Search />
+            <SearchActivity />
             <Activity
                 activity={paginatedActivity}
                 currentPage={currentPage}

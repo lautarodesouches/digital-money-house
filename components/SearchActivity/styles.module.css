@@ -1,0 +1,36 @@
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.search__icon {
+    position: absolute;
+    left: 10px;
+    width: 18px;
+    height: 18px;
+    fill: #828282;
+}
+
+.search__input {
+    box-shadow: 0px 4px 4px 0px #0000001a;
+    padding: 1rem;
+    width: 100%;
+    padding-left: 35px;
+    font-size: 1rem;
+    border: 1px solid #d2ffec;
+    border-radius: 5px;
+}
+
+/* Tablet */
+
+@media (min-width: 768px) {
+    
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+
+}
