@@ -41,6 +41,7 @@
 }
 
 .active {
+    cursor: pointer;
     display: flex;
     width: 100%;
     padding: 1.5rem 0;
@@ -168,7 +169,7 @@
     z-index: 1000;
 }
 
-.filters__hidden{
+.filters__hidden {
     height: 0;
     overflow: hidden;
 }

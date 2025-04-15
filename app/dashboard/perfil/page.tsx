@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import ProfileInfo from './profileInfo'
 import { ButtonPrimary, CvuAlias, Title } from '@/components'
 import Link from 'next/link'
+import { ArrowIcon } from '@/components/Icons'
 
 export default async function Perfil() {
     const token = await getToken()
@@ -27,13 +28,7 @@ export default async function Perfil() {
                 <Link href={ROUTES.TARJETAS}>
                     <ButtonPrimary>
                         <span>Gestioná los medios de pago</span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 -960 960 960"
-                            className={styles.button__arrow}
-                        >
-                            <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
-                        </svg>
+                        <ArrowIcon styles={styles.button__arrow} />
                     </ButtonPrimary>
                 </Link>
             </section>

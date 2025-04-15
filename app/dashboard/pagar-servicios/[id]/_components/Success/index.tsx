@@ -7,6 +7,7 @@ import { formatNumber } from '@/utils/formatNumber'
 import { useRef } from 'react'
 import html2pdf from 'html2pdf.js'
 import { ButtonPrimary, ButtonSecondary } from '@/components'
+import { CheckIcon } from '@/components/Icons'
 
 interface Props {
     date: string
@@ -35,13 +36,7 @@ export default function Success({ card, date, description, amount }: Props) {
     return (
         <section className={styles.success}>
             <div className={styles.success__div}>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 -960 960 960"
-                    className={styles.success__icon}
-                >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
-                </svg>
+                <CheckIcon styles={styles.success__icon} />
                 <h2 className={styles.success__title}>Ya realizamos tu pago</h2>
             </div>
             <div className={styles.success__div} ref={pdfRef}>

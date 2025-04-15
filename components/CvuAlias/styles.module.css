@@ -27,6 +27,8 @@
 .data__svg {
     width: 24px;
     height: 24px;
+    fill: var(--secondary);
+    cursor: pointer;
 }
 
 .data__number {
