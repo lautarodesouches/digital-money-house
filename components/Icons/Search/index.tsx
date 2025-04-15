@@ -1,8 +1,6 @@
-interface Props {
-    styles: string
-}
+import { IconType } from "@/interfaces/Icon"
 
-export default function SearchIcon({ styles }: Props) {
+export default function SearchIcon({ styles }: IconType) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
