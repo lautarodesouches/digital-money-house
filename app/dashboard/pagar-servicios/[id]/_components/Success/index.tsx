@@ -12,7 +12,7 @@ import { CheckIcon } from '@/components/Icons'
 interface Props {
     date: string
     description: string
-    card: number
+    card: string
     amount: number
 }
 
