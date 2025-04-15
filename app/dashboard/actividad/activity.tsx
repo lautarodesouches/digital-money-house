@@ -25,6 +25,7 @@ export default function Activity({ activity, currentPage, totalPages }: Props) {
     const handlePageClick = (page: number) => {
         const params = new URLSearchParams()
         params.set('page', page.toString())
+
         router.push(`${pathname}?${params.toString()}`)
     }
 
@@ -77,7 +78,15 @@ export default function Activity({ activity, currentPage, totalPages }: Props) {
                         }/${date.getFullYear()}`
 
                         return (
-                            <article className={styles.active} key={index} onClick={() => router.push(`${ROUTES.ACTIVIDAD}/${item.id}`)}>
+                            <article
+                                className={styles.active}
+                                key={index}
+                                onClick={() =>
+                                    router.push(
+                                        `${ROUTES.ACTIVIDAD}/${item.id}`
+                                    )
+                                }
+                            >
                                 <div className={styles.active__start}>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"

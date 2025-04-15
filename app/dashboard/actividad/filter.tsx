@@ -53,14 +53,19 @@ export default function Filter({ showFilters, setShowFilters }: Props) {
 
     const handleClearFilters = () => {
         const params = new URLSearchParams(searchParams.toString())
+        
         params.delete('filter')
         params.set('page', '1')
+        
         router.push(`?${params.toString()}`)
+
         setShowFilters(false)
     }
 
     return (
-        <aside className={showFilters ? styles.filters : styles.filters__hidden}>
+        <aside
+            className={showFilters ? styles.filters : styles.filters__hidden}
+        >
             <div
                 className={`${styles.filters__content} ${
                     showFilters ? styles.filtersActive : ''
