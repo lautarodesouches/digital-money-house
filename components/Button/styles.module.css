@@ -10,6 +10,10 @@
     transition: all 1s ease-in-out;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.button:has(:nth-child(2)) {
     justify-content: space-between;
 }
 
@@ -18,7 +22,7 @@
 }
 
 @media (min-width: 768px) {
-    .button{
+    .button {
         padding: 1.25rem;
     }
 }
