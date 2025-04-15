@@ -1,9 +1,16 @@
 'use client'
-import { Footer } from '@/components'
+import { ButtonPrimary, Footer } from '@/components'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../../routes'
-import { startTransition, useActionState, useCallback, useEffect, useMemo, useState } from 'react'
+import {
+    startTransition,
+    useActionState,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react'
 import { register } from './actions'
 import { formatDni } from '@/utils/formatDni'
 
@@ -216,13 +223,9 @@ export default function Create() {
                         value={phone}
                         onChange={e => setPhone(e.target.value)}
                     />
-
-                    <button
-                        className={styles.main__button}
-                        disabled={!isFormValid}
-                    >
+                    <ButtonPrimary disabled={!isFormValid}>
                         Crear cuenta
-                    </button>
+                    </ButtonPrimary>
                 </form>
 
                 {!isFormValid && (

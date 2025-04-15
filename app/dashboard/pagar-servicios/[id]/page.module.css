@@ -31,24 +31,8 @@
 
 .button__container {
     display: flex;
-    justify-content: flex-end;
-}
-
-.button {
-    width: 40%;
-    margin-right: 0;
-    background: var(--secondary);
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px #0000001a;
-    padding: 0.75rem 2rem;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #000;
-}
-
-.button:disabled {
-    background: #d2d2d2;
+    width: fit-content;
+    margin-left: auto;
 }
 
 .two {

@@ -1,5 +1,5 @@
 'use client'
-import { List } from '@/components'
+import { ButtonPrimary, List } from '@/components'
 import styles from './page.module.css'
 import { ServiceType, TransactionType } from '@/interfaces'
 import { useState } from 'react'
@@ -98,13 +98,12 @@ export default function Content({ service, account, cards }: Props) {
                             />
                         </div>
                         <div className={styles.button__container}>
-                            <button
-                                className={styles.button}
+                            <ButtonPrimary
                                 onClick={handleNext}
                                 disabled={!form.account}
                             >
                                 Continuar
-                            </button>
+                            </ButtonPrimary>
                         </div>
                     </section>
                 )}
@@ -141,13 +140,9 @@ export default function Content({ service, account, cards }: Props) {
                             )}
                         />
                         <div className={styles.button__container}>
-                            <button
-                                className={styles.button}
-                                disabled={!form.card}
-                                type="submit"
-                            >
+                            <ButtonPrimary disabled={!form.card} type="submit">
                                 Pagar
-                            </button>
+                            </ButtonPrimary>
                         </div>
                     </section>
                 )}

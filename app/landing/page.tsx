@@ -17,7 +17,6 @@ export default async function Landing() {
                         {parse(content.subtitle)}
                     </h2>
                 </section>
-
                 <section className={styles.content}>
                     {content.features.map((feature, i) => (
                         <article className={styles.content__art} key={i}>

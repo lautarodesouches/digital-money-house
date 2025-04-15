@@ -1,5 +1,5 @@
 'use client'
-import { Footer, Header } from '@/components'
+import { ButtonPrimary, ButtonSecondary, Footer, Header } from '@/components'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../../routes'
@@ -68,24 +68,19 @@ export default function Login() {
                         required
                     />
                     <div className={styles.form__div}>
-                        <button
-                            className={styles.form__button}
-                            disabled={isLoading}
-                        >
+                        <ButtonPrimary disabled={isLoading}>
                             {content.buttonText}
                             {isLoading && (
                                 <span className={styles.progress}></span>
                             )}
-                        </button>
+                        </ButtonPrimary>
                     </div>
                     {content.stage === 'email' && !exito && (
                         <Link
                             className={styles.form__link}
                             href={ROUTES.CREAR_CUENTA}
                         >
-                            <button className={styles.form__button}>
-                                Crear cuenta
-                            </button>
+                            <ButtonSecondary>Crear cuenta</ButtonSecondary>
                         </Link>
                     )}
                     <span className={styles.form__error}>

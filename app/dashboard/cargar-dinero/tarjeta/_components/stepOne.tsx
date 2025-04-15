@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from '../page.module.css'
 import { ROUTES } from '@/routes'
-import { List } from '@/components'
+import { ButtonPrimary, List } from '@/components'
 import { CardType } from '@/interfaces'
 
 interface Props {
@@ -56,9 +56,7 @@ export default function StepOne({
                 </Link>
             </article>
             <div className={styles.buttonContainer}>
-                <button className={styles.button} onClick={handleNext}>
-                    Continuar
-                </button>
+                <ButtonPrimary onClick={handleNext}>Continuar</ButtonPrimary>
             </div>
         </>
     )

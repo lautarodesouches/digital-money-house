@@ -7,6 +7,7 @@ import { createCard } from '@/services/createCard'
 import { useRouter } from 'next/navigation'
 import { getCardType } from '@/utils/getCardType'
 import Image from 'next/image'
+import { ButtonPrimary } from '@/components'
 
 interface CardData {
     number_id: string
@@ -158,13 +159,9 @@ export default function Content() {
                         value={cardData.cod}
                         onChange={handleChange}
                     />
-                    <button
-                        type="submit"
-                        className={styles.card__button}
-                        disabled={isPending}
-                    >
+                    <ButtonPrimary disabled={isPending}>
                         {isPending ? 'Cargando...' : 'Continuar'}
-                    </button>
+                    </ButtonPrimary>
                 </form>
             </section>
         </>

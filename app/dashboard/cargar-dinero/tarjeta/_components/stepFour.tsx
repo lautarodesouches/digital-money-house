@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from '../page.module.css'
 import { ROUTES } from '@/routes'
 import { useRef } from 'react'
+import { ButtonPrimary, ButtonSecondary } from '@/components'
 
 interface Props {
     id: number
@@ -45,7 +46,9 @@ export default function StepFour({
                 >
                     <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
                 </svg>
-                <p className={styles.four__top__text}>Ya cargamos el dinero en tu cuenta</p>
+                <p className={styles.four__top__text}>
+                    Ya cargamos el dinero en tu cuenta
+                </p>
             </div>
             <article className={styles.card}>
                 <h2 className={styles.card__title}>
@@ -64,11 +67,17 @@ export default function StepFour({
                             <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z" />
                         </svg>
                     </div>
-                    <span className={`${styles.three__top__amount} ${styles.secondary}`}>${amount}</span>
+                    <span
+                        className={`${styles.three__top__amount} ${styles.secondary}`}
+                    >
+                        ${amount}
+                    </span>
                 </div>
                 <div className={styles.three__middle}>
                     <p className={styles.three__middle__text}>Para</p>
-                    <span className={`${styles.three__middle__span} ${styles.secondary}`}>
+                    <span
+                        className={`${styles.three__middle__span} ${styles.secondary}`}
+                    >
                         Cuenta propia
                     </span>
                 </div>
@@ -81,13 +90,13 @@ export default function StepFour({
             </article>
             <div className={styles.four__buttons}>
                 <div>
-                    <button className={styles.button} onClick={handleDownload}>
+                    <ButtonPrimary onClick={handleDownload}>
                         Descargar comprobante
-                    </button>
+                    </ButtonPrimary>
                 </div>
                 <div>
                     <Link href={ROUTES.INICIO}>
-                        <button className={styles.buttonSecondary}>Ir al inicio</button>
+                        <ButtonSecondary>Ir al inicio</ButtonSecondary>
                     </Link>
                 </div>
             </div>

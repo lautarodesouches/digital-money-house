@@ -1,0 +1,9 @@
+.button{
+    background: var(--grey);
+    color: #000;
+}
+
+.button:hover{
+    background: var(--dark);
+    color: #fff;
+}

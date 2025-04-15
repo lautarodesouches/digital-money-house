@@ -6,6 +6,7 @@
     gap: 0.5rem;
     border-radius: 10px;
     padding: 1.5rem;
+    box-shadow: 0px 4px 4px 0px #0000001a;
 }
 
 .card__div:nth-child(1) {

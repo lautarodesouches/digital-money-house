@@ -1,6 +1,7 @@
 import { ROUTES } from '@/routes'
 import styles from './styles.module.css'
 import Link from 'next/link'
+import ButtonPrimary from '../ButtonPrimary'
 
 interface Props {
     background?: 'primary' | 'secondary'
@@ -48,10 +49,11 @@ export default function Header({
                     </Link>
                 </div>
                 <div className={styles.header__div}>
-                    <Link className={styles.header__link} href={ROUTES.CREAR_CUENTA}>
-                        <button className={styles.header__create}>
-                            Crear cuenta
-                        </button>
+                    <Link
+                        className={styles.header__link}
+                        href={ROUTES.CREAR_CUENTA}
+                    >
+                        <ButtonPrimary>Crear cuenta</ButtonPrimary>
                     </Link>
                 </div>
             </nav>

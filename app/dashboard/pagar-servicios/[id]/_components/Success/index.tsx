@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { formatNumber } from '@/utils/formatNumber'
 import { useRef } from 'react'
 import html2pdf from 'html2pdf.js'
+import { ButtonPrimary, ButtonSecondary } from '@/components'
 
 interface Props {
     date: string
@@ -15,7 +16,6 @@ interface Props {
 }
 
 export default function Success({ card, date, description, amount }: Props) {
-
     const pdfRef = useRef<HTMLDivElement>(null)
 
     const handleDownload = () => {
@@ -63,11 +63,13 @@ export default function Success({ card, date, description, amount }: Props) {
                 </div>
             </div>
             <div className={styles.success__div}>
-                <button className={styles.button} onClick={handleDownload}>Descargar comprobante</button>
+                <ButtonPrimary onClick={handleDownload}>
+                    Descargar comprobante
+                </ButtonPrimary>
             </div>
             <div className={styles.success__div}>
                 <Link href={ROUTES.INICIO}>
-                    <button className={styles.button}>Ir al inicio</button>
+                    <ButtonSecondary>Ir al inicio</ButtonSecondary>
                 </Link>
             </div>
         </section>

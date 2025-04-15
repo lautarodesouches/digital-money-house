@@ -36,24 +36,6 @@
     color: unset;
 }
 
-.form__button {
-    position: relative;
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.form__div .form__button {
-    background: var(--secondary);
-}
-
-.form__link .form__button {
-    background: var(--grey);
-}
-
 .form__error {
     font-size: 15px;
     font-style: italic;
@@ -69,10 +51,6 @@
 
     .form__input{
         margin-top: 1rem;
-        padding: 1.25rem;
-    }
-
-    .form__button{
         padding: 1.25rem;
     }
 }

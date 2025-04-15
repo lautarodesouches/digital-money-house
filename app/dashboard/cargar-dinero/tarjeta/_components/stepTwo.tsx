@@ -1,3 +1,4 @@
+import { ButtonPrimary } from '@/components'
 import styles from '../page.module.css'
 
 interface Props {
@@ -21,13 +22,12 @@ export default function StepTwo({ amount, handleAmount, handleNext }: Props) {
                 />
             </article>
             <div className={styles.buttonContainer}>
-                <button
-                    className={styles.button}
+                <ButtonPrimary
                     onClick={amount > 0 ? handleNext : undefined}
                     disabled={amount <= 0}
                 >
                     Continuar
-                </button>
+                </ButtonPrimary>
             </div>
         </>
     )
