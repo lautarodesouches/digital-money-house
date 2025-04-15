@@ -5,7 +5,8 @@ import { getToken } from '@/services/getToken'
 import { ROUTES } from '@/routes'
 import { redirect } from 'next/navigation'
 import ProfileInfo from './profileInfo'
-import { CvuAlias, Title } from '@/components'
+import { ButtonPrimary, CvuAlias, Title } from '@/components'
+import Link from 'next/link'
 
 export default async function Perfil() {
     const token = await getToken()
@@ -23,16 +24,18 @@ export default async function Perfil() {
             <Title>Perfil</Title>
             <ProfileInfo token={token} userId={account.user_id} user={user} />
             <section className={styles.button}>
-                <button className={styles.button__btn}>
-                    <span>Gestioná los medios de pago</span>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 -960 960 960"
-                        className={styles.button__arrow}
-                    >
-                        <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
-                    </svg>
-                </button>
+                <Link href={ROUTES.TARJETAS}>
+                    <ButtonPrimary>
+                        <span>Gestioná los medios de pago</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 -960 960 960"
+                            className={styles.button__arrow}
+                        >
+                            <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
+                        </svg>
+                    </ButtonPrimary>
+                </Link>
             </section>
             <CvuAlias cvu={account.cvu} alias={account.alias} />
         </>
