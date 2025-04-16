@@ -111,7 +111,7 @@ export default function SideBar({
                                 href={path}
                                 onClick={onClick}
                                 className={
-                                    pathname === path ? styles.nav__active : ''
+                                    pathname.includes(path) ? styles.nav__active : ''
                                 }
                             >
                                 {name}

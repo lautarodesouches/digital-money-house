@@ -2,6 +2,16 @@
     padding: 1.5rem;
     background: #fff;
     border-radius: 8px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: show 0.5s ease-out forwards;
+}
+
+@keyframes show {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .list__title {

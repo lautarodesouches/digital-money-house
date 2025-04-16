@@ -1,10 +1,10 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.article{
+.article {
     background: var(--primary);
     display: flex;
     gap: 1rem;
@@ -13,26 +13,36 @@
     padding: 1rem;
     border-radius: 8px;
     height: 125px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: show 0.8s ease-out forwards;
 }
 
-.article div{
+@keyframes show {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.article div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.article div:nth-child(2){
+.article div:nth-child(2) {
     flex: 1;
     justify-content: flex-start;
 }
 
-.article__icon{
+.article__icon {
     width: 30px;
     height: 30px;
     fill: var(--secondary);
 }
 
-.article__title{
+.article__title {
     font-size: 1.25rem;
     color: var(--secondary);
     font-weight: 700;
