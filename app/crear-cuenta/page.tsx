@@ -3,128 +3,138 @@ import { ButtonPrimary, Footer } from '@/components'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { ROUTES } from '../../routes'
-import {
-    startTransition,
-    useActionState,
-    useCallback,
-    useEffect,
-    useMemo,
-    useState,
-} from 'react'
+import React, { startTransition, useActionState, useState } from 'react'
 import { register } from './actions'
 import { formatDni } from '@/utils/formatDni'
+
+type FieldName =
+    | 'firstname'
+    | 'lastname'
+    | 'dni'
+    | 'email'
+    | 'password'
+    | 'confirmPassword'
+    | 'phone'
+
+type FormState = {
+    [key in FieldName]: {
+        value: string
+        error: string
+    }
+}
+
+const fields: {
+    name: string
+    placeholder: string
+    type: string
+    inputMode?: 'numeric' | undefined
+}[] = [
+    { name: 'firstname', placeholder: 'Nombre*', type: 'text' },
+    { name: 'lastname', placeholder: 'Apellido*', type: 'text' },
+    { name: 'dni', placeholder: 'DNI*', type: 'text', inputMode: 'numeric' },
+    { name: 'email', placeholder: 'Correo electrónico*', type: 'email' },
+    { name: 'password', placeholder: 'Contraseña*', type: 'password' },
+    {
+        name: 'confirmPassword',
+        placeholder: 'Confirmar contraseña*',
+        type: 'password',
+    },
+    { name: 'phone', placeholder: 'Teléfono*', type: 'tel' },
+]
 
 export default function Create() {
     const [, formAction] = useActionState(register, null)
 
-    const [dni, setDni] = useState('')
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [passwordError, setPasswordError] = useState('')
-    const [matchError, setMatchError] = useState('')
+    const [form, setForm] = useState<FormState>({
+        firstname: { value: '', error: '' },
+        lastname: { value: '', error: '' },
+        dni: { value: '', error: '' },
+        email: { value: '', error: '' },
+        password: { value: '', error: '' },
+        confirmPassword: { value: '', error: '' },
+        phone: { value: '', error: '' },
+    })
 
-    const [isFormValid, setIsFormValid] = useState(true) // Para verificar si el formulario es válido
+    const [isFormValid, setIsFormValid] = useState(true)
 
-    // Expresión regular para validar la contraseña
-    const passwordRegex = useMemo(
-        () => /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/,
-        []
-    )
+    const passwordRegex =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/
 
-    const handleDni = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDni(formatDni(e.target.value))
+    const validateField = (name: string, value: string): string => {
+        if (name === 'password' && !passwordRegex.test(value))
+            return 'Debe tener 6-20 caracteres, 1 mayúscula, 1 número y 1 carácter especial.'
+
+        if (name === 'confirmPassword' && value !== form.password.value)
+            return 'Las contraseñas no coinciden.'
+
+        if (value === '') return 'El campo se encuentra vacio'
+
+        return ''
     }
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newPassword = e.target.value
-        setPassword(newPassword)
-
-        if (!passwordRegex.test(newPassword)) {
-            setPasswordError(
-                'Debe tener 6-20 caracteres, 1 mayúscula, 1 número y 1 carácter especial.'
-            )
-        } else {
-            setPasswordError('')
-        }
+    const formatValue = (name: string, value: string): string => {
+        if (name === 'dni') return formatDni(value)
+        return value.trim()
     }
 
-    const handleConfirmPasswordChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const newConfirmPassword = e.target.value
-        setConfirmPassword(newConfirmPassword)
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
 
-        if (newConfirmPassword !== password) {
-            setMatchError('Las contraseñas no coinciden.')
-        } else {
-            setMatchError('')
-        }
+        const formattedValue = formatValue(name, value)
+        const error = validateField(name, formattedValue)
+
+        setForm(prev => ({
+            ...prev,
+            [name]: {
+                value,
+                error,
+            },
+        }))
     }
 
-    const checkIfFormIsValid = useCallback(() => {
-        return (
-            passwordRegex.test(password) &&
-            password === confirmPassword &&
-            dni.trim().length > 0 &&
-            Boolean(password) &&
-            Boolean(confirmPassword) &&
-            Boolean(firstname) &&
-            Boolean(lastname) &&
-            Boolean(email) &&
-            Boolean(phone)
-        )
-    }, [
-        password,
-        confirmPassword,
-        dni,
-        firstname,
-        lastname,
-        email,
-        phone,
-        passwordRegex,
-    ])
+    const checkIfFormIsValid = () => {
+        let isValid = true
+
+        setForm(prevForm => {
+            const updatedForm = { ...prevForm }
+
+            for (const key in updatedForm) {
+                const fieldKey = key as FieldName
+                const value = updatedForm[fieldKey].value.trim()
+
+                const error = value === '' ? 'El campo se encuentra vacio' : ''
+                if (error) isValid = false
+
+                updatedForm[fieldKey] = {
+                    ...updatedForm[fieldKey],
+                    error,
+                }
+            }
+
+            return updatedForm
+        })
+
+        return isValid
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const isValid = checkIfFormIsValid()
+        const isFormValid = checkIfFormIsValid()
 
-        if (!isValid) return setIsFormValid(false)
+        if (!isFormValid) return setIsFormValid(isFormValid)
 
         const formData = new FormData()
 
-        formData.append('firstname', firstname)
-        formData.append('lastname', lastname)
-        formData.append('dni', dni)
-        formData.append('email', email)
-        formData.append('password', password)
-        formData.append('phone', phone)
+        Object.entries(form).forEach(([key, field]) => {
+            if (key === 'confirmPassword') return
+            formData.append(key, field.value)
+        })
 
         startTransition(() => {
             formAction(formData)
         })
     }
-
-    useEffect(() => {
-        const isValid = checkIfFormIsValid()
-        setIsFormValid(isValid)
-    }, [
-        firstname,
-        lastname,
-        dni,
-        email,
-        phone,
-        password,
-        confirmPassword,
-        passwordError,
-        matchError,
-        passwordRegex,
-        checkIfFormIsValid,
-    ])
 
     return (
         <>
@@ -152,89 +162,49 @@ export default function Create() {
                     </Link>
                 </nav>
             </header>
-
             <main className={styles.main}>
                 <h2 className={styles.main__title}>Crear cuenta</h2>
                 <form className={styles.main__form} onSubmit={handleSubmit}>
-                    <input
-                        className={styles.main__input}
-                        name="firstname"
-                        type="text"
-                        placeholder="Nombre*"
-                        value={firstname}
-                        onChange={e => setFirstname(e.target.value)}
-                    />
-                    <input
-                        className={styles.main__input}
-                        name="lastname"
-                        type="text"
-                        placeholder="Apellido*"
-                        value={lastname}
-                        onChange={e => setLastname(e.target.value)}
-                    />
-                    <input
-                        className={styles.main__input}
-                        name="dni"
-                        type="text"
-                        placeholder="DNI*"
-                        value={dni}
-                        onChange={handleDni}
-                        inputMode="numeric"
-                    />
-                    <input
-                        className={styles.main__input}
-                        name="email"
-                        type="email"
-                        placeholder="Correo electrónico*"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-
-                    <span className={styles.main__hint}>
-                        Usa entre 6 y 20 caracteres (debe contener al menos 1
-                        mayúscula, 1 número y 1 carácter especial).
-                    </span>
-
-                    <input
-                        className={`${styles.main__input} ${
-                            passwordError ? styles.inputError : ''
-                        }`}
-                        name="password"
-                        type="password"
-                        placeholder="Contraseña*"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                    <input
-                        className={`${styles.main__input} ${
-                            matchError ? styles.inputError : ''
-                        }`}
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Confirmar contraseña*"
-                        value={confirmPassword}
-                        onChange={handleConfirmPasswordChange}
-                    />
-                    <input
-                        className={styles.main__input}
-                        name="phone"
-                        type="tel"
-                        placeholder="Teléfono*"
-                        value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                    />
-                    <ButtonPrimary disabled={!isFormValid}>
-                        Crear cuenta
-                    </ButtonPrimary>
+                    {fields.map(
+                        (
+                            { name, placeholder, type, inputMode = undefined },
+                            index
+                        ) => (
+                            <React.Fragment key={name}>
+                                {index === 4 && (
+                                    <span className={styles.main__hint}>
+                                        Usa entre 6 y 20 caracteres (debe
+                                        contener al menos 1 mayúscula, 1 número
+                                        y 1 carácter especial).
+                                    </span>
+                                )}
+                                <input
+                                    key={name}
+                                    className={`${styles.main__input} ${
+                                        form[name as keyof typeof form].error
+                                            ? styles.inputError
+                                            : ''
+                                    }`}
+                                    name={name}
+                                    type={type}
+                                    placeholder={placeholder}
+                                    inputMode={inputMode}
+                                    value={
+                                        form[name as keyof typeof form].value
+                                    }
+                                    onChange={handleChange}
+                                />
+                            </React.Fragment>
+                        )
+                    )}
+                    <ButtonPrimary>Crear cuenta</ButtonPrimary>
                 </form>
-
                 {!isFormValid && (
                     <span className={styles.main__span}>
                         Completa los campos requeridos
                     </span>
                 )}
             </main>
-
             <Footer />
         </>
     )
