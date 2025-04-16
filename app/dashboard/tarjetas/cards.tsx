@@ -12,12 +12,15 @@ interface Props {
 
 export default function Cards({ token, account }: Props) {
     const [cards, setCards] = useState<CardType[]>([])
+    const [loading, setLoading] = useState(true)
 
     const getCards = async (token: string, account: AccountType) => {
         if (!token) {
             console.error('No hay token disponible')
             return []
         }
+
+        setLoading(true)
 
         const response = await fetch(
             `${API_URL}/api/accounts/${account.id}/cards`,
@@ -38,6 +41,8 @@ export default function Cards({ token, account }: Props) {
         const cards = await response.json()
 
         setCards(cards)
+
+        setLoading(false)
     }
 
     const handleDeleteClick = async (cardId: number) => {
@@ -61,6 +66,7 @@ export default function Cards({ token, account }: Props) {
 
     return (
         <List
+            loading={loading}
             title="Tus tarjetas"
             content={cards}
             center={card =>
