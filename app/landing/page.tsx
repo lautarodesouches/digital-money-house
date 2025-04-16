@@ -1,14 +1,35 @@
 import parse from 'html-react-parser'
 import styles from './page.module.css'
-import { Footer, Header } from '@/components'
+import { ButtonPrimary, Footer, Header } from '@/components'
 import { getLandingContent } from '@/services/getLandingContent'
+import Link from 'next/link'
+import { ROUTES } from '@/routes'
 
 export default async function Landing() {
     const content = await getLandingContent()
 
     return (
         <>
-            <Header />
+            <Header>
+                <div className={styles.header__div}>
+                    <Link
+                        className={styles.header__link}
+                        href={ROUTES.INICIAR_SESION}
+                    >
+                        <button className={styles.header__login}>
+                            Ingresar
+                        </button>
+                    </Link>
+                </div>
+                <div className={styles.header__div}>
+                    <Link
+                        className={styles.header__link}
+                        href={ROUTES.CREAR_CUENTA}
+                    >
+                        <ButtonPrimary>Crear cuenta</ButtonPrimary>
+                    </Link>
+                </div>
+            </Header>
             <main className={styles.main}>
                 <section className={styles.top}>
                     <h1 className={styles.top__title}>{content.title}</h1>

@@ -1,26 +1,5 @@
 /* Header */
 
-.header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--secondary);
-    padding: 15px;
-    gap: 1rem;
-}
-
-.header__logo {
-    width: 30%;
-    fill: var(--primary);
-}
-
-.header__nav {
-    width: 60%;
-    display: flex;
-    gap: 1rem;
-}
-
 .header__link {
     width: 100%;
     display: flex;

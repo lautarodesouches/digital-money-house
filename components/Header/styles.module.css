@@ -9,14 +9,14 @@
 }
 
 .header__logo {
-    width: 70%;
+    width: 80%;
 }
 
-.fill__primary{
-    fill: var(--primary);    
+.fill__primary {
+    fill: var(--primary);
 }
 
-.fill__secondary{
+.fill__secondary {
     fill: var(--secondary);
 }
 
@@ -27,6 +27,7 @@
 .header__nav {
     flex: 3;
     display: flex;
+    justify-content: flex-end;
     gap: 1rem;
 }
 
@@ -44,19 +45,6 @@
     cursor: pointer;
     border-radius: 5px;
     padding: 0.8rem;
-}
-
-.header__login {
-    border: 1px solid var(--secondary);
-    color: var(--secondary);
-    background: var(--primary);
-    transition: all 1s ease-in-out;
-}
-
-.header__login:hover{
-    border: 1px solid var(--secondary);
-    color: var(--primary);
-    background: var(--secondary);
 }
 
 /* Tablet */

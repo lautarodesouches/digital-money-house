@@ -1,18 +1,15 @@
 import { ROUTES } from '@/routes'
 import styles from './styles.module.css'
 import Link from 'next/link'
-import ButtonPrimary from '../ButtonPrimary'
 import { DmhIcon } from '../Icons'
+import { ReactNode } from 'react'
 
 interface Props {
     background?: 'primary' | 'secondary'
-    showNav?: boolean
+    children?: ReactNode
 }
 
-export default function Header({
-    background = 'primary',
-    showNav = true,
-}: Props) {
+export default function Header({ background = 'primary', children }: Props) {
     return (
         <header
             className={styles.header}
@@ -30,29 +27,7 @@ export default function Header({
                     />
                 </Link>
             </div>
-            <nav
-                className={styles.header__nav}
-                style={{ visibility: showNav ? 'visible' : 'hidden' }}
-            >
-                <div className={styles.header__div}>
-                    <Link
-                        className={styles.header__link}
-                        href={ROUTES.INICIAR_SESION}
-                    >
-                        <button className={styles.header__login}>
-                            Ingresar
-                        </button>
-                    </Link>
-                </div>
-                <div className={styles.header__div}>
-                    <Link
-                        className={styles.header__link}
-                        href={ROUTES.CREAR_CUENTA}
-                    >
-                        <ButtonPrimary>Crear cuenta</ButtonPrimary>
-                    </Link>
-                </div>
-            </nav>
+            <nav className={styles.header__nav}>{children}</nav>
         </header>
     )
 }

@@ -43,7 +43,7 @@ export default function Login() {
 
     return (
         <>
-            <Header background="secondary" showNav={false} />
+            <Header background="secondary" />
             <main className={styles.main}>
                 <form
                     className={styles.form}
