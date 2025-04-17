@@ -17,3 +17,16 @@
     font-weight: bold;
     font-size: 1.1rem;
 }
+
+/* Tablet */
+
+@media (min-width: 768px) {
+    .top {
+        display: none;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+}

@@ -3,8 +3,10 @@ import styles from './page.module.css'
 import { TransferType } from '@/interfaces'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
-import Filter from './filter'
+import Filters from './_components/filters'
 import { ROUTES } from '@/routes'
+import { SearchActivity } from '@/components'
+import Filter from './_components/filter'
 
 interface Props {
     activity: TransferType[]
@@ -12,7 +14,7 @@ interface Props {
     totalPages: number
 }
 
-export default function Activity({ activity, currentPage, totalPages }: Props) {
+export default function Content({ activity, currentPage, totalPages }: Props) {
     const [showFilters, setShowFilters] = useState(false)
 
     const router = useRouter()
@@ -30,28 +32,15 @@ export default function Activity({ activity, currentPage, totalPages }: Props) {
     }
 
     return (
-        <>
+        <div className={styles.container}>
+            <SearchActivity />
+            <Filter handleFilterClick={handleFilterClick} />
             <section className={styles.list}>
                 <div className={styles.list__header}>
                     <div className={styles.list__div}>
                         <h2 className={styles.list__title}>Tu actividad</h2>
                     </div>
-                    <div className={styles.list__div}>
-                        <span
-                            className={styles.list__span}
-                            onClick={handleFilterClick}
-                        >
-                            Filtrar
-                        </span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 -960 960 960"
-                            className={styles.list__icon}
-                            onClick={handleFilterClick}
-                        >
-                            <path d="M440-120v-240h80v80h320v80H520v80h-80Zm-320-80v-80h240v80H120Zm160-160v-80H120v-80h160v-80h80v240h-80Zm160-80v-80h400v80H440Zm160-160v-240h80v80h160v80H680v80h-80Zm-480-80v-80h400v80H120Z" />
-                        </svg>
-                    </div>
+                    <Filter handleFilterClick={handleFilterClick} />
                 </div>
                 <div className={styles.list__content}>
                     {activity.length === 0 && (
@@ -132,7 +121,7 @@ export default function Activity({ activity, currentPage, totalPages }: Props) {
                     })}
                 </nav>
             </section>
-            <Filter showFilters={showFilters} setShowFilters={setShowFilters} />
-        </>
+            <Filters showFilters={showFilters} setShowFilters={setShowFilters} />
+        </div>
     )
 }

@@ -42,39 +42,48 @@ export default function Content({ activity }: Props) {
     }
 
     return (
-        <>
-            <div className={styles.activity}>
-                <article className={styles.activity__art} ref={pdfRef}>
-                    <div className={styles.activity__top}>
+        <div className={styles.activity}>
+            <article className={styles.activity__art} ref={pdfRef}>
+                <div className={styles.activity__top}>
+                    <div className={styles.activity__join}>
                         <CheckIcon styles={styles.activity__svg} />
                         <h2 className={styles.activity__title}>Aprobada</h2>
                     </div>
-                    <hr className={styles.activity__hr} />
                     <div className={styles.activity__date}>
                         <p>{formatPrettyDate(activity.dated)}</p>
                     </div>
-                    <div className={styles.activity__amount}>
-                        <p>{activity.description}</p>
-                        <p>${activity.amount.toLocaleString('es-AR')}</p>
+                </div>
+                <hr className={styles.activity__hr} />
+                <div className={styles.activity__date}>
+                    <p>{formatPrettyDate(activity.dated)}</p>
+                </div>
+                <div className={styles.activity__amount}>
+                    <p>{activity.description}</p>
+                    <p>${activity.amount.toLocaleString('es-AR')}</p>
+                </div>
+                {activity.destination && (
+                    <div className={styles.activity__info}>
+                        <p>Le transferiste a</p>
+                        <p>{activity.destination}</p>
                     </div>
-                    {activity.destination && (
-                        <div className={styles.activity__info}>
-                            <p>Le transferiste a</p>
-                            <p>{activity.destination}</p>
-                        </div>
-                    )}
-                    <div className={styles.activity__number}>
-                        <p>Número de operación</p>
-                        <p>{activity.id}</p>
-                    </div>
-                </article>
+                )}
+                <div className={styles.activity__number}>
+                    <p>Número de operación</p>
+                    <p>{activity.id}</p>
+                </div>
+            </article>
+            <div className={styles.container}>
                 <button onClick={handleDownload} className={styles.button}>
                     Descargar comprobante
                 </button>
                 <Link className={styles.link} href={ROUTES.INICIO}>
-                    <button className={styles.button}>Ir al inicio</button>
+                    <button
+                        className={`${styles.button} ${styles.button__grey}`}
+                    >
+                        Ir al inicio
+                    </button>
                 </Link>
             </div>
-        </>
+        </div>
     )
 }

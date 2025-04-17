@@ -1,4 +1,5 @@
 .search {
+    grid-area: search;
     position: relative;
     display: flex;
     align-items: center;

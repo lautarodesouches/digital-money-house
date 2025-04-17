@@ -2,9 +2,8 @@ import { getToken } from '@/services/getToken'
 import { getAccount } from '@/services/getAccount'
 import { redirect } from 'next/navigation'
 import { ROUTES } from '@/routes'
-import Activity from './activity'
-import { SearchActivity } from '@/components'
 import { getAllActivityFiltered } from '@/services/getAllActivityFiltered'
+import Content from './content'
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 
@@ -33,13 +32,10 @@ export default async function ActivityPage(props: {
     )
 
     return (
-        <>
-            <SearchActivity />
-            <Activity
-                activity={paginatedActivity}
-                currentPage={currentPage}
-                totalPages={totalPages}
-            />
-        </>
+        <Content
+            activity={paginatedActivity}
+            currentPage={currentPage}
+            totalPages={totalPages}
+        />
     )
 }

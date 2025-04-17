@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 
 interface Props<T> {
-    loading: boolean
+    loading?: boolean
     title: string
     content: T[]
     center?: (item: T) => React.ReactNode

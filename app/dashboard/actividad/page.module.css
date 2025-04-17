@@ -1,29 +1,19 @@
-.search {
-    position: relative;
+.container {
     display: flex;
-    align-items: center;
-    width: 100%;
+    gap: 1rem;
+    flex-direction: column;
 }
 
-.search__icon {
-    position: absolute;
-    left: 10px;
-    width: 18px;
-    height: 18px;
-    fill: #828282;
+.container > .filter {
+    display: none;
 }
 
-.search__input {
-    box-shadow: 0px 4px 4px 0px #0000001a;
-    padding: 1rem;
-    width: 100%;
-    padding-left: 35px;
-    font-size: 1rem;
-    border: 1px solid #d2ffec;
-    border-radius: 5px;
+.list .filter {
+    display: flex;
 }
 
 .list {
+    grid-area: list;
     padding: 1.5rem;
     background: #fff;
     border-radius: 8px;
@@ -118,19 +108,6 @@
     align-items: center;
 }
 
-.list__span {
-    font-size: 1rem;
-    color: var(--dark);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-}
-
-.list__icon {
-    width: 15px;
-    height: 15px;
-    fill: var(--dark);
-}
-
 .nav {
     margin-top: 1rem;
     display: flex;
@@ -154,6 +131,30 @@
     height: 25px;
 }
 
+/* Filter */
+
+.filter {
+    cursor: pointer;
+    grid-area: filter;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter__span {
+    font-size: 1rem;
+    color: var(--dark);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.filter__icon {
+    width: 15px;
+    height: 15px;
+    fill: var(--dark);
+}
+
 /* Filters */
 
 .filters {
@@ -167,6 +168,16 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: show 0.8s ease-out forwards;
+}
+
+@keyframes show {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .filters__hidden {
@@ -257,4 +268,37 @@
 }
 
 @media (min-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas:
+            'search search search filter'
+            'list list list list';
+        gap: 1rem;
+    }
+
+    .container > .filter {
+        display: flex;
+    }
+
+    .list .filter {
+        display: none;
+    }
+
+    .filter {
+        background: var(--secondary);
+        border-radius: 8px;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .filter__span {
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .filters__content {
+        width: 30%;
+    }
 }

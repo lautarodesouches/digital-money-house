@@ -1,5 +1,5 @@
 'use client'
-import styles from './page.module.css'
+import styles from '../page.module.css'
 import { useState, Dispatch, SetStateAction } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
@@ -8,7 +8,7 @@ interface Props {
     setShowFilters: Dispatch<SetStateAction<boolean>>
 }
 
-export default function Filter({ showFilters, setShowFilters }: Props) {
+export default function Filters({ showFilters, setShowFilters }: Props) {
     const router = useRouter()
     const searchParams = useSearchParams()
 
