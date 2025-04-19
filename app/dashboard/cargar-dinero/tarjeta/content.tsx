@@ -6,7 +6,8 @@ import createDeposit from '@/services/createDeposit'
 import StepOne from './_components/stepOne'
 import StepTwo from './_components/stepTwo'
 import StepThree from './_components/stepThree'
-import StepFour from './_components/stepFour'
+import Success from './_components/success'
+import { Error } from '@/components'
 
 interface Props {
     cards: CardType[]
@@ -99,14 +100,20 @@ export default function Content({ cards, account }: Props) {
                     handleSubmit={handleSubmit}
                 />
             )}
-            {step === 3 && 'account_id' in depositResponse && (
-                <StepFour
-                    id={depositResponse.id}
-                    amount={depositResponse.amount}
-                    dated={depositResponse.dated}
-                    destination={depositResponse.destination}
-                    handleBack={handleBack}
-                />
+            {step === 3 && (
+                <>
+                    {'account_id' in depositResponse ? (
+                        <Success
+                            id={depositResponse.id}
+                            amount={depositResponse.amount}
+                            dated={depositResponse.dated}
+                            destination={depositResponse.destination}
+                            handleBack={handleBack}
+                        />
+                    ) : (
+                        <Error />
+                    )}
+                </>
             )}
         </div>
     )

@@ -3,6 +3,7 @@ import Button from '../Button'
 import styles from './styles.module.css'
 
 export default function ButtonPrimary({
+    style,
     children,
     disabled,
     type,
@@ -10,7 +11,7 @@ export default function ButtonPrimary({
 }: ButtonType) {
     return (
         <Button
-            style={styles.button}
+            style={`${styles.button} ${style}`}
             disabled={disabled}
             type={type}
             onClick={onClick}

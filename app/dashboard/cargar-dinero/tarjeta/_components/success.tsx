@@ -16,7 +16,7 @@ interface Props {
     handleBack: () => void
 }
 
-export default function StepFour({
+export default function Success({
     id,
     amount,
     dated,
@@ -41,9 +41,9 @@ export default function StepFour({
 
     return (
         <div ref={pdfRef}>
-            <div className={styles.four__top}>
-                <CheckIcon styles={styles.four__top__svg} />
-                <p className={styles.four__top__text}>
+            <div className={styles.success__top}>
+                <CheckIcon styles={styles.success__top__svg} />
+                <p className={styles.success__top__text}>
                     Ya cargamos el dinero en tu cuenta
                 </p>
             </div>
@@ -83,7 +83,7 @@ export default function StepFour({
                     </span>
                 </div>
             </article>
-            <div className={styles.four__buttons}>
+            <div className={styles.success__buttons}>
                 <div>
                     <ButtonPrimary onClick={handleDownload}>
                         Descargar comprobante

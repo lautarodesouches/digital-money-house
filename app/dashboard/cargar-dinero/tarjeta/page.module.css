@@ -1,3 +1,11 @@
+.d_mobile{
+    display: block;
+}
+
+.d_desktop{
+    display: none;
+}
+
 .card {
     background: var(--primary);
     border-radius: 8px;
@@ -21,6 +29,10 @@
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--secondary);
+}
+
+.two__input {
+    width: 100%;
 }
 
 .one__input:checked {
@@ -105,7 +117,7 @@
     color: #fff;
 }
 
-.four__top {
+.success__top {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -118,19 +130,19 @@
     margin-bottom: 1rem;
 }
 
-.four__top__svg {
+.success__top__svg {
     width: 35px;
     height: 35px;
     fill: #000;
 }
 
-.four__top__text {
+.success__top__text {
     color: #000;
     font-size: 1rem;
     font-weight: 700;
 }
 
-.four__buttons {
+.success__buttons {
     margin-top: 1rem;
     width: 100%;
     display: flex;
@@ -138,12 +150,18 @@
     flex-direction: column;
 }
 
-.four__buttons button {
+.success__buttons button {
     width: 100%;
 }
 
-.secondary{
+.secondary {
     color: var(--secondary) !important;
+}
+
+.one__div{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .buttonContainer {
@@ -155,7 +173,60 @@
 }
 
 @media (min-width: 768px) {
+    .d_mobile{
+        display: none;
+    }
+
+    .d_desktop{
+        display: block;
+    }
+
+    .card{
+        padding: 3rem;
+        gap: 2rem;
+    }
+
+    .success__buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .success__buttons div:nth-child(1) {
+        order: 2;
+    }
+
+    .success__buttons div {
+        width: 50%;
+    }
+
+    .success__buttons button {
+        font-size: 0.9rem;
+    }
 }
 
 @media (min-width: 1024px) {
+
+    .one__div{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .one__div a, .one__div button{
+        width: 30%;
+    }
+
+    .two__input {
+        width: 40%;
+    }
+
+    .success__buttons div {
+        width: 25%;
+    }
+
+    .buttonContainer{
+        width: 30%;
+        margin-top: 0;
+        margin-right: 0;
+    }
 }

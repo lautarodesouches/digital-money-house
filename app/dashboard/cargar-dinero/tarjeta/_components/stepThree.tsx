@@ -27,7 +27,10 @@ export default function StepThree({
                         <p className={styles.three__top__text}>
                             Vas a transferir
                         </p>
-                        <EditIcon styles={styles.three__top__icon} onClick={handleBack} />
+                        <EditIcon
+                            styles={styles.three__top__icon}
+                            onClick={handleBack}
+                        />
                     </div>
                     <span className={styles.three__top__amount}>${amount}</span>
                 </div>
@@ -43,9 +46,20 @@ export default function StepThree({
                         CVU {cvu}
                     </span>
                 </div>
+                <div
+                    className={`${styles.buttonContainer} ${styles.d_desktop}`}
+                >
+                    <ButtonPrimary
+                        onClick={handleSubmit}
+                    >
+                        Continuar
+                    </ButtonPrimary>
+                </div>
             </article>
-            <div className={styles.buttonContainer}>
-                <ButtonPrimary onClick={handleSubmit}>Continuar</ButtonPrimary>
+            <div className={`${styles.buttonContainer} ${styles.d_mobile}`}>
+                <ButtonPrimary onClick={handleSubmit}>
+                    Continuar
+                </ButtonPrimary>
             </div>
         </>
     )

@@ -1,0 +1,17 @@
+.error{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+.error__title{
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.error__link{
+    width: 50%;
+    margin: auto;
+}

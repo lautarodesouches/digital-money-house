@@ -41,17 +41,27 @@ export default function StepOne({
                         />
                     )}
                 />
-                <Link href={ROUTES.TARJETAS__NUEVA}>
-                    <div className={styles.one__bottom}>
-                        <PlusIcon styles={styles.one__icon} />
-                        <h3 className={styles.one__bottomTitle}>
-                            Nueva tarjeta
-                        </h3>
-                    </div>
-                </Link>
+                <div className={styles.one__div}>
+                    <Link href={ROUTES.TARJETAS__NUEVA}>
+                        <div className={styles.one__bottom}>
+                            <PlusIcon styles={styles.one__icon} />
+                            <h3 className={styles.one__bottomTitle}>
+                                Nueva tarjeta
+                            </h3>
+                        </div>
+                    </Link>
+                    <ButtonPrimary
+                        style={styles.d_desktop}
+                        onClick={handleNext}
+                    >
+                        Continuar
+                    </ButtonPrimary>
+                </div>
             </article>
             <div className={styles.buttonContainer}>
-                <ButtonPrimary onClick={handleNext}>Continuar</ButtonPrimary>
+                <ButtonPrimary style={styles.d_mobile} onClick={handleNext}>
+                    Continuar
+                </ButtonPrimary>
             </div>
         </>
     )

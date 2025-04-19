@@ -20,8 +20,18 @@ export default function StepTwo({ amount, handleAmount, handleNext }: Props) {
                     placeholder="$0"
                     onChange={handleAmount}
                 />
+                <div
+                    className={`${styles.buttonContainer} ${styles.d_desktop}`}
+                >
+                    <ButtonPrimary
+                        onClick={amount > 0 ? handleNext : undefined}
+                        disabled={amount <= 0}
+                    >
+                        Continuar
+                    </ButtonPrimary>
+                </div>
             </article>
-            <div className={styles.buttonContainer}>
+            <div className={`${styles.buttonContainer} ${styles.d_mobile}`}>
                 <ButtonPrimary
                     onClick={amount > 0 ? handleNext : undefined}
                     disabled={amount <= 0}
