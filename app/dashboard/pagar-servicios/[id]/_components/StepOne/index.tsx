@@ -28,8 +28,17 @@ export default function StepOne({
                     name="account"
                     onChange={handleSelectAccount}
                 />
+                <p className={styles.one__span}>
+                    Son 11 números sin espacios, sin el “2” inicial. Agregá
+                    ceros adelante si tenés menos.{' '}
+                </p>
+                <div className={`${styles.button__container} ${styles.d_desktop}`}>
+                    <ButtonPrimary onClick={handleNext} disabled={disabled}>
+                        Continuar
+                    </ButtonPrimary>
+                </div>
             </div>
-            <div className={styles.button__container}>
+            <div className={`${styles.button__container} ${styles.d_mobile}`}>
                 <ButtonPrimary onClick={handleNext} disabled={disabled}>
                     Continuar
                 </ButtonPrimary>

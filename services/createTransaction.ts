@@ -25,10 +25,7 @@ export default async function createTransaction(accountId: string, data: Data) {
         }
     )
 
-    if (!response.ok) {
-        const data = await response.json()
-        console.error('Error creating deposit:', data)
-    }
+    if (!response.ok) console.error('Error creating deposit')
 
     return response.json()
 }

@@ -21,9 +21,29 @@ interface Form {
     card: string | null
 }
 
+const AccountError = {
+    title: 'No encontramos facturas asociadas a este dato',
+    text: 'Revisá el dato ingresado. Si es correcto, es posible que la empresa aún no haya cargado tu factura.',
+    button: 'Revisar dato',
+}
+
+const UnknownError = {
+    title: 'Hubo un problema con tu pago',
+    text: 'Puede deberse a fondos insuficientes. Comunicate con la entidad emisora de la tarjeta',
+    button: 'Volver a intentarlo',
+}
+
+type Error =
+    | undefined
+    | {
+          title: string
+          text: string
+          button: string
+      }
+
 export default function Content({ service, account, cards }: Props) {
     const [step, setStep] = useState(1)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState<Error>(undefined)
     const [form, setForm] = useState<Form>({
         account,
         card: null,
@@ -49,25 +69,30 @@ export default function Content({ service, account, cards }: Props) {
         setForm(prev => ({ ...prev, card }))
     }
 
+    const handleError = (error: string) => {
+        if (error === 'Not allowed to access account') setError(AccountError)
+        else setError(UnknownError)
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const body = {
+        const data = {
             amount: parseInt(`-${service.invoice_value}`),
             dated: new Date().toISOString(),
             description: service.name,
         }
 
-        const response = await createTransaction(form.account, body)
+        const response = await createTransaction(form.account, data)
 
-        if (response.error) return setError(response.error)
+        if (response.error) return handleError(response.error)
 
         setResponse(response)
 
         handleNext()
     }
 
-    if (error) return <Error />
+    if (error) return <Error {...error} />
 
     if (response.dated && form.card)
         return (
