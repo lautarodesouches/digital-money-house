@@ -37,6 +37,12 @@ export default function Content() {
 
     const [cardType, setCardType] = useState('Unknown')
 
+    const isFormComplete =
+        cardData.number_id.trim() !== '' &&
+        cardData.first_last_name.trim() !== '' &&
+        cardData.expiration_date.trim() !== '' &&
+        cardData.cod.trim() !== ''
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
 
@@ -127,41 +133,45 @@ export default function Content() {
                     </div>
                 </div>
                 <form className={styles.card__form} action={handleSubmit}>
-                    <input
-                        name="number_id"
-                        className={styles.card__input}
-                        placeholder="Número de la tarjeta*"
-                        type="number"
-                        value={cardData.number_id}
-                        onChange={handleChange}
-                    />
-                    <input
-                        name="first_last_name"
-                        className={styles.card__input}
-                        placeholder="Nombre y apellido*"
-                        type="text"
-                        value={cardData.first_last_name}
-                        onChange={handleChange}
-                    />
-                    <input
-                        name="expiration_date"
-                        className={styles.card__input}
-                        placeholder="Fecha de vencimiento (MMYY)*"
-                        type="text"
-                        value={cardData.expiration_date}
-                        onChange={handleChange}
-                    />
-                    <input
-                        name="cod"
-                        className={styles.card__input}
-                        placeholder="Código de seguridad*"
-                        type="password"
-                        value={cardData.cod}
-                        onChange={handleChange}
-                    />
-                    <ButtonPrimary disabled={isPending}>
-                        {isPending ? 'Cargando...' : 'Continuar'}
-                    </ButtonPrimary>
+                    <div className={styles.card__inputs}>
+                        <input
+                            name="number_id"
+                            className={styles.card__input}
+                            placeholder="Número de la tarjeta*"
+                            type="number"
+                            value={cardData.number_id}
+                            onChange={handleChange}
+                        />
+                        <input
+                            name="first_last_name"
+                            className={styles.card__input}
+                            placeholder="Nombre y apellido*"
+                            type="text"
+                            value={cardData.first_last_name}
+                            onChange={handleChange}
+                        />
+                        <input
+                            name="expiration_date"
+                            className={styles.card__input}
+                            placeholder="Fecha de vencimiento (MMYYYY)*"
+                            type="text"
+                            value={cardData.expiration_date}
+                            onChange={handleChange}
+                        />
+                        <input
+                            name="cod"
+                            className={styles.card__input}
+                            placeholder="Código de seguridad*"
+                            type="password"
+                            value={cardData.cod}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.card__button}>
+                        <ButtonPrimary disabled={!isFormComplete || isPending}>
+                            {isPending ? 'Cargando...' : 'Continuar'}
+                        </ButtonPrimary>
+                    </div>
                 </form>
             </section>
         </>
