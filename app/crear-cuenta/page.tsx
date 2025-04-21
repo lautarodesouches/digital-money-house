@@ -1,8 +1,6 @@
 'use client'
-import { ButtonPrimary, Footer, Header } from '@/components'
+import { ButtonPrimary } from '@/components'
 import styles from './page.module.css'
-import Link from 'next/link'
-import { ROUTES } from '../../routes'
 import React, { startTransition, useActionState, useState } from 'react'
 import { register } from './actions'
 import { formatDni } from '@/utils/formatDni'
@@ -137,63 +135,46 @@ export default function Create() {
     }
 
     return (
-        <>
-            <Header background="secondary">
-                <div className={styles.header__div}>
-                    <Link
-                        className={styles.header__link}
-                        href={ROUTES.INICIAR_SESION}
-                    >
-                        <button className={styles.header__login}>
-                            Iniciar sesión
-                        </button>
-                    </Link>
-                </div>
-            </Header>
-            <main className={styles.main}>
-                <h2 className={styles.main__title}>Crear cuenta</h2>
-                <form className={styles.main__form} onSubmit={handleSubmit}>
-                    {fields.map(
-                        (
-                            { name, placeholder, type, inputMode = undefined },
-                            index
-                        ) => (
-                            <React.Fragment key={name}>
-                                {index === 4 && (
-                                    <span className={styles.main__hint}>
-                                        Usa entre 6 y 20 caracteres (debe
-                                        contener al menos 1 mayúscula, 1 número
-                                        y 1 carácter especial).
-                                    </span>
-                                )}
-                                <input
-                                    key={name}
-                                    className={`${styles.main__input} ${
-                                        form[name as keyof typeof form].error
-                                            ? styles.inputError
-                                            : ''
-                                    }`}
-                                    name={name}
-                                    type={type}
-                                    placeholder={placeholder}
-                                    inputMode={inputMode}
-                                    value={
-                                        form[name as keyof typeof form].value
-                                    }
-                                    onChange={handleChange}
-                                />
-                            </React.Fragment>
-                        )
-                    )}
-                    <ButtonPrimary>Crear cuenta</ButtonPrimary>
-                </form>
-                {!isFormValid && (
-                    <span className={styles.main__span}>
-                        Completa los campos requeridos
-                    </span>
+        <main className={styles.main}>
+            <h2 className={styles.main__title}>Crear cuenta</h2>
+            <form className={styles.main__form} onSubmit={handleSubmit}>
+                {fields.map(
+                    (
+                        { name, placeholder, type, inputMode = undefined },
+                        index
+                    ) => (
+                        <React.Fragment key={name}>
+                            {index === 4 && (
+                                <span className={styles.main__hint}>
+                                    Usa entre 6 y 20 caracteres (debe contener
+                                    al menos 1 mayúscula, 1 número y 1 carácter
+                                    especial).
+                                </span>
+                            )}
+                            <input
+                                key={name}
+                                className={`${styles.main__input} ${
+                                    form[name as keyof typeof form].error
+                                        ? styles.inputError
+                                        : ''
+                                }`}
+                                name={name}
+                                type={type}
+                                placeholder={placeholder}
+                                inputMode={inputMode}
+                                value={form[name as keyof typeof form].value}
+                                onChange={handleChange}
+                            />
+                        </React.Fragment>
+                    )
                 )}
-            </main>
-            <Footer />
-        </>
+                <ButtonPrimary>Crear cuenta</ButtonPrimary>
+            </form>
+            {!isFormValid && (
+                <span className={styles.main__span}>
+                    Completa los campos requeridos
+                </span>
+            )}
+        </main>
     )
 }
