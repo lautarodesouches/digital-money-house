@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💸 Digital Money - Desafío Profesional Front-End
 
-## Getting Started
+Este proyecto es parte del Desafío Profesional de **Digital House** para obtener el certificado de **Front End Specialist**.
 
-First, run the development server:
+**Digital Money** es una aplicación de billetera virtual desarrollada con **Next.js**, que permite a los usuarios gestionar sus finanzas personales, realizar pagos de servicios y utilizar su billetera desde cualquier dispositivo (escritorio, tablet o móvil).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tecnologías Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js**
+- **React**
+- **CSS Modules**
+- **html2pdf** (para exportar comprobantes en PDF)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Instalación
 
-To learn more about Next.js, take a look at the following resources:
+1. Cloná el repositorio.
+2. Instalá las dependencias con `npm install` o `yarn install`.
+3. Configurá el archivo `.env.local` con los valores necesarios para la conexión a la API.
+4. Ejecutá la app con `npm run dev` o `yarn dev`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧩 Funcionalidades por Sprint
 
-## Deploy on Vercel
+### 🏁 Sprint 1: Página de inicio, registro, inicio y cierre de sesión
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Objetivo:
+Desarrollar una página de inicio que muestre los servicios de la billetera digital, con funcionalidades de registro, inicio y cierre de sesión.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Requerimientos:
+- **Página de inicio**:
+  - Mostrar los servicios ofrecidos.
+  - Enlaces al registro, inicio y cierre de sesión.
+- **Funcionalidades**:
+  - Formulario de registro con validación.
+  - Formulario de login con validación.
+  - Opción de cierre de sesión.
+  - Manejo de errores desde la API.
+
+---
+
+### 🧑‍💼 Sprint 2: Mi Perfil, Medios de Pago e Ingreso de Dinero
+
+#### Objetivo:
+Agregar páginas protegidas para gestionar el perfil del usuario, medios de pago y realizar ingresos de dinero.
+
+#### Requerimientos:
+- **Acceso autenticado**:
+  - Solo usuarios logueados pueden acceder.
+  - Uso de token en cada solicitud.
+- **Páginas**:
+  - **Mi Perfil**: Visualización y edición de datos personales.
+  - **Medios de Pago**: Gestión de tarjetas o cuentas bancarias.
+  - **Ingreso de Dinero**: Cargar saldo desde medios de pago asociados.
+
+---
+
+### 💳 Sprint 3: Pago de Servicios y Dashboard
+
+#### Objetivo:
+Permitir a los usuarios pagar servicios desde su billetera y visualizar su actividad financiera.
+
+#### Requerimientos:
+- **Pago de servicios**:
+  - Lista de servicios (ej: luz, agua, teléfono).
+  - Selección del servicio y método de pago (saldo o medios registrados).
+  - Validación y confirmación de transacción.
+  - Comprobante con monto, servicio y fecha.
+- **Dashboard**:
+  - Mostrar saldo actual.
+  - Listado de transacciones recientes con filtros.
+
+---
+
+### 📊 Sprint 4: Actividad del Usuario
+
+#### Objetivo:
+Implementar una página donde el usuario pueda ver y filtrar todos sus movimientos financieros.
+
+#### Requerimientos:
+- **Acceso autenticado**:
+  - Validación del token en cada solicitud.
+- **Visualización**:
+  - Lista cronológica de movimientos (ingresos y egresos).
+  - Colores para distinguir ingresos (verde) y egresos (rojo).
+- **Filtros y búsqueda**:
+  - Por tipo, fecha, monto o palabra clave.
+  - Filtros avanzados por categoría (servicios, recargas, transferencias).
+
+---
+
+## 🌐 Deploy
+
+La aplicación está desplegada en **Vercel** y se conecta a una API provista por Digital House (documentada en Swagger).
+
+## 📝 Notas
+
+- Asegurate de tener un archivo `.env.local` con las variables necesarias.
+- Todas las funcionalidades requieren conexión con la API backend.
+- El proyecto está pensado para escalar y mantener una buena experiencia en múltiples dispositivos.
