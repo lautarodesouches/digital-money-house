@@ -55,6 +55,8 @@ export default function Filters({ showFilters, setShowFilters }: Props) {
         const params = new URLSearchParams(searchParams.toString())
         
         params.delete('filter')
+        params.delete('date')
+        params.delete('search')
         params.set('page', '1')
         
         router.push(`?${params.toString()}`)
