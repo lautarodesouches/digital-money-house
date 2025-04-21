@@ -1,11 +1,3 @@
-.d_mobile{
-    display: block;
-}
-
-.d_desktop{
-    display: none;
-}
-
 .card {
     background: var(--primary);
     border-radius: 8px;
@@ -229,4 +221,12 @@
         margin-top: 0;
         margin-right: 0;
     }
+}
+
+.d_mobile{
+    display: block;
+}
+
+.d_desktop{
+    display: none;
 }
