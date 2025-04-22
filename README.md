@@ -24,6 +24,14 @@ Este proyecto es parte del Desafío Profesional de **Digital House** para obtene
 
 ---
 
+## 🌐 Deploy
+
+La aplicación está desplegada en **Vercel** y se conecta a una API provista por Digital House (documentada en Swagger).
+
+https://digital-money-house-beryl.vercel.app/
+
+---
+
 ## 🧩 Funcionalidades por Sprint
 
 ### 🏁 Sprint 1: Página de inicio, registro, inicio y cierre de sesión
@@ -92,10 +100,6 @@ Implementar una página donde el usuario pueda ver y filtrar todos sus movimient
   - Filtros avanzados por categoría (servicios, recargas, transferencias).
 
 ---
-
-## 🌐 Deploy
-
-La aplicación está desplegada en **Vercel** y se conecta a una API provista por Digital House (documentada en Swagger).
 
 ## 📝 Notas
 
