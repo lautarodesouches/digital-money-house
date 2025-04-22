@@ -1,4 +1,4 @@
-import { IconType } from "@/interfaces/Icon"
+import { IconType } from "@/interfaces"
 
 export default function SearchIcon({ styles }: IconType) {
     return (
