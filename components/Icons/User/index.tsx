@@ -1,4 +1,4 @@
-import { IconType } from '@/interfaces/Icon'
+import { IconType } from '@/interfaces'
 import Icon from '../Icon'
 
 export default function UserIcon({ styles }: IconType) {

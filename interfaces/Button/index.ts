@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export interface ButtonType {
+export default interface ButtonType {
     children: ReactNode
     style?: string
     disabled?: boolean

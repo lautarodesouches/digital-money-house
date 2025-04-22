@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export interface IconType {
+export default interface IconType {
     styles: string
     children?: ReactNode
     onClick?: () => void

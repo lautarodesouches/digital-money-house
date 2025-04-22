@@ -1,4 +1,4 @@
-import { ButtonType } from '@/interfaces/Button'
+import { ButtonType } from '@/interfaces'
 import styles from './styles.module.css'
 
 export default function Button({
