@@ -17,7 +17,7 @@ interface CardData {
 }
 
 const MAX_LENGTHS = {
-    number_id: 19,
+    number_id: 15,
     first_last_name: 20,
     expiration_date: 6,
     cod: 3,
