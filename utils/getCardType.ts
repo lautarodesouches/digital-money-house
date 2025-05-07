@@ -1,24 +1,20 @@
-type CardType =
-    | 'Visa'
-    | 'MasterCard'
-    | 'Amex'
-    | 'Discover'
-    | 'Unknown'
+type CardType = 'Visa' | 'MasterCard' | 'Amex' | 'Discover' | 'Unknown'
 
 // Función que toma un número de tarjeta y devuelve el tipo de tarjeta
 export const getCardType = (cardNumber: string): CardType => {
     const cleanedCardNumber = cardNumber.replace(/\s+/g, '') // Eliminamos espacios en blanco
+    const firstFourDigits = cleanedCardNumber.slice(0, 4) // Tomamos los primeros 4 dígitos
 
-    if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(cleanedCardNumber)) {
+    if (/^4/.test(firstFourDigits)) {
         return 'Visa'
     }
-    if (/^5[1-5][0-9]{14}$/.test(cleanedCardNumber)) {
+    if (/^5[1-5]/.test(firstFourDigits)) {
         return 'MasterCard'
     }
-    if (/^3[47][0-9]{13}$/.test(cleanedCardNumber)) {
+    if (/^3[47]/.test(firstFourDigits)) {
         return 'Amex'
     }
-    if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(cleanedCardNumber)) {
+    if (/^6/.test(firstFourDigits)) {
         return 'Discover'
     }
 
