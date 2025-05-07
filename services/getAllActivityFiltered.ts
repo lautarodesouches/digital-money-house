@@ -5,28 +5,25 @@ import { isDateInRange } from '@/utils/isDateInRange'
 export async function getAllActivityFiltered(
     token: string,
     account: AccountType,
-    search: string | string[] | undefined,
-    date: string | string[] | undefined
+    search?: string | string[],
+    date?: string | string[]
 ) {
-    // Fetch
     const allActivity = await getAllActivity(token, account)
-    
-    // Filter
-    const query = typeof search === 'string' ? search.toLowerCase().trim() : ''
+
+    const query = typeof search === 'string' ? search.trim().toLowerCase() : ''
     const dateFilter = typeof date === 'string' ? date : undefined
 
-    const filteredActivity = allActivity.filter(item => {
-        const matchesSearch = !query || item.description.toLowerCase().includes(query)
-        const matchesDate = !dateFilter || isDateInRange(new Date(item.dated), dateFilter)
-        return matchesSearch && matchesDate
-    })
+    const filteredAndSorted = allActivity
+        .filter(({ description, dated }) => {
+            const matchesSearch =
+                !query || description.toLowerCase().includes(query)
+            const matchesDate =
+                !dateFilter || isDateInRange(new Date(dated), dateFilter)
+            return matchesSearch && matchesDate
+        })
+        .sort(
+            (a, b) => new Date(b.dated).getTime() - new Date(a.dated).getTime()
+        )
 
-    // Sort
-    filteredActivity.sort((a, b) => {
-        const dateA = new Date(a.dated).getTime()
-        const dateB = new Date(b.dated).getTime()
-        return dateB - dateA
-    })
-
-    return filteredActivity
+    return filteredAndSorted
 }

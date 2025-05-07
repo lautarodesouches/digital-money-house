@@ -2,12 +2,12 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import { List, SearchActivity, Title } from '@/components'
 import { ROUTES } from '@/routes'
-import { getAllActivity } from '@/services/getAllActivity'
 import { getAccount } from '@/services/getAccount'
 import { getToken } from '@/services/getToken'
 import { redirect } from 'next/navigation'
 import { getWeekday } from '@/utils/getWeekday'
 import { formatNumber } from '@/utils/formatNumber'
+import { getAllActivityFiltered } from '@/services/getAllActivityFiltered'
 
 export default async function Home() {
     const token = await getToken()
@@ -16,7 +16,7 @@ export default async function Home() {
 
     if (!account) return redirect(ROUTES.INICIAR_SESION)
 
-    const activity = await getAllActivity(token, account)
+    const activity = await getAllActivityFiltered(token, account)
 
     activity.length = activity.length > 10 ? 10 : activity.length
 
