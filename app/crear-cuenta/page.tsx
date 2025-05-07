@@ -166,7 +166,9 @@ export default function Create() {
                         </React.Fragment>
                     )
                 )}
-                <ButtonPrimary>Crear cuenta</ButtonPrimary>
+                <div className={styles.main__group}>
+                    <ButtonPrimary>Crear cuenta</ButtonPrimary>
+                </div>
             </form>
         </main>
     )
