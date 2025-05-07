@@ -165,20 +165,20 @@
 }
 
 .d_mobile{
-    display: block;
+    display: block !important;
 }
 
 .d_desktop{
-    display: none;
+    display: none !important;
 }
 
 @media (min-width: 768px) {
     .d_mobile{
-        display: none;
+        display: none !important;
     }
 
     .d_desktop{
-        display: block;
+        display: block !important;
     }
 
     .card{
