@@ -35,6 +35,27 @@
     color: #eeeaea;
 }
 
+.copied {
+    font-size: 1rem;
+    font-weight: 600;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    background: var(--secondary);
+    padding: 10px 20px;
+    color: var(--dark);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.copied.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (min-width: 768px) {
     .data {
         padding: 2rem;
