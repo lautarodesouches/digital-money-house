@@ -53,12 +53,15 @@ export default function Create() {
         phone: { value: '', error: '' },
     })
 
-    const [isFormValid, setIsFormValid] = useState(true)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
     const passwordRegex =
         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$/
 
     const validateField = (name: string, value: string): string => {
+        if (name === 'email' && !emailRegex.test(value))
+            return 'El email es invalido.'
+
         if (name === 'password' && !passwordRegex.test(value))
             return 'Debe tener 6-20 caracteres, 1 mayúscula, 1 número y 1 carácter especial.'
 
@@ -79,40 +82,26 @@ export default function Create() {
         const { name, value } = e.target
 
         const formattedValue = formatValue(name, value)
+
         const error = validateField(name, formattedValue)
 
         setForm(prev => ({
             ...prev,
             [name]: {
-                value,
+                value: formattedValue,
                 error,
             },
         }))
     }
 
     const checkIfFormIsValid = () => {
-        let isValid = true
+        for (const key in form) {
+            const fieldKey = key as FieldName
+            if (form[fieldKey].value === '') return false
+            if (form[fieldKey].error) return false
+        }
 
-        setForm(prevForm => {
-            const updatedForm = { ...prevForm }
-
-            for (const key in updatedForm) {
-                const fieldKey = key as FieldName
-                const value = updatedForm[fieldKey].value.trim()
-
-                const error = value === '' ? 'El campo se encuentra vacio' : ''
-                if (error) isValid = false
-
-                updatedForm[fieldKey] = {
-                    ...updatedForm[fieldKey],
-                    error,
-                }
-            }
-
-            return updatedForm
-        })
-
-        return isValid
+        return true
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,7 +109,7 @@ export default function Create() {
 
         const isFormValid = checkIfFormIsValid()
 
-        if (!isFormValid) return setIsFormValid(isFormValid)
+        if (!isFormValid) return
 
         const formData = new FormData()
 
@@ -151,30 +140,34 @@ export default function Create() {
                                     especial).
                                 </span>
                             )}
-                            <input
-                                key={name}
-                                className={`${styles.main__input} ${
-                                    form[name as keyof typeof form].error
-                                        ? styles.inputError
-                                        : ''
-                                }`}
-                                name={name}
-                                type={type}
-                                placeholder={placeholder}
-                                inputMode={inputMode}
-                                value={form[name as keyof typeof form].value}
-                                onChange={handleChange}
-                            />
+                            <div className={styles.main__group}>
+                                <input
+                                    key={name}
+                                    className={`${styles.main__input} ${
+                                        form[name as keyof typeof form].error
+                                            ? styles.inputError
+                                            : ''
+                                    }`}
+                                    name={name}
+                                    type={type}
+                                    placeholder={placeholder}
+                                    inputMode={inputMode}
+                                    value={
+                                        form[name as keyof typeof form].value
+                                    }
+                                    onChange={handleChange}
+                                />
+                                {form[name as keyof typeof form].error && (
+                                    <span className={styles.main__error}>
+                                        {form[name as keyof typeof form].error}
+                                    </span>
+                                )}
+                            </div>
                         </React.Fragment>
                     )
                 )}
                 <ButtonPrimary>Crear cuenta</ButtonPrimary>
             </form>
-            {!isFormValid && (
-                <span className={styles.main__span}>
-                    Completa los campos requeridos
-                </span>
-            )}
         </main>
     )
 }

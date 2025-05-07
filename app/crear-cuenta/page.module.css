@@ -55,6 +55,11 @@
     }
 }
 
+.main__group {
+    display: flex;
+    flex-direction: column;
+}
+
 .main__input {
     padding: 1rem;
     font-size: 16px;
@@ -65,6 +70,12 @@
 
 .main__input::placeholder {
     color: #7f7f7f;
+}
+
+.main__error {
+    color: var(--error);
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
 }
 
 .inputError {
@@ -139,14 +150,11 @@
     .main__form {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2rem;
         position: relative;
     }
 
     .main__hint {
-        position: absolute;
-        left: 0;
-        top: calc(50% - 0.5rem);
+        grid-column: span 2;
         width: 100%;
         display: block;
         text-align: center;
